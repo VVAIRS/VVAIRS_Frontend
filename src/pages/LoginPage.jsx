@@ -10,18 +10,15 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  // Handle input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+    setLoading(true);
 
-    // Frontend validation
     if (!formData.email || !formData.password) {
       setError("Email and password are required");
       setLoading(false);
@@ -29,42 +26,32 @@ const LoginPage = () => {
     }
 
     try {
-        console.log("Login request payload:", formData);
-
       const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
       const response = await axios.post(
-          `${API_BASE_URL}/api/auth/login`,
-        formData,
-        { headers: { "Content-Type": "application/json" } }
+        `${API_BASE_URL}/api/auth/login`,
+        formData
       );
 
-      console.log("Login successful:", response.data);
-
-      // Optional: save token if returned
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
       }
 
-      // Redirect to dashboard
       navigate("/DashboardPage");
-    } catch (err) {
-      console.error("Login error:", err);
 
+    } catch (err) {
       if (err.response) {
-        // Backend returned a response with error
-        console.error("Full backend error response:", err.response);
-        // Show detailed error if available
         const backendMessage =
           err.response.data?.message ||
+          err.response.data?.detail ||
           err.response.data?.error ||
-          "Login failed. Please check your credentials.";
+          "Invalid credentials";
+
         setError(backendMessage);
       } else if (err.request) {
-        // Request was made but no response
-        setError("Server did not respond. Please try again later.");
+        setError("Server did not respond.");
       } else {
-        // Something else
-        setError("An unexpected error occurred.");
+        setError("Unexpected error occurred.");
       }
     } finally {
       setLoading(false);
@@ -76,7 +63,7 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit} style={styles.form}>
         <h2 style={styles.title}>Login</h2>
 
-        <label>Email</label>
+        <label style={styles.label}>Email</label>
         <input
           type="email"
           name="email"
@@ -84,10 +71,9 @@ const LoginPage = () => {
           onChange={handleChange}
           placeholder="Enter your email"
           style={styles.input}
-          required
         />
 
-        <label>Password</label>
+        <label style={styles.label}>Password</label>
         <input
           type="password"
           name="password"
@@ -95,7 +81,6 @@ const LoginPage = () => {
           onChange={handleChange}
           placeholder="Enter your password"
           style={styles.input}
-          required
         />
 
         {error && <p style={styles.error}>{error}</p>}
@@ -121,46 +106,55 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
-    background: "#f5f5f5",
+    background: "#f1f1f1", // light grey
   },
   form: {
     display: "flex",
     flexDirection: "column",
     padding: "2rem",
-    borderRadius: "8px",
-    background: "#fff",
-    boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
-    width: "300px",
+    borderRadius: "10px",
+    background: "#ffffff", // white
+    boxShadow: "0px 4px 12px rgba(0,0,0,0.08)", // soft grey shadow
+    width: "320px",
   },
   title: {
     textAlign: "center",
     marginBottom: "1rem",
+    color: "#000000", // black
+  },
+  label: {
+    color: "#333", // dark grey
+    marginBottom: "4px",
   },
   input: {
-    padding: "0.5rem",
-    margin: "0.5rem 0 1rem 0",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
+    padding: "0.6rem",
+    marginBottom: "1rem",
+    borderRadius: "6px",
+    border: "1px solid #ccc", // light grey border
+    background: "#fafafa", // slightly off-white
+    color: "#000",
   },
   button: {
     padding: "0.7rem",
     border: "none",
-    borderRadius: "4px",
-    background: "#007bff",
-    color: "#fff",
+    borderRadius: "6px",
+    background: "#333333", // dark grey button
+    color: "#ffffff", // white text
     cursor: "pointer",
   },
   error: {
-    color: "red",
+    color: "#ff4444",
     marginBottom: "1rem",
+    fontSize: "0.9rem",
   },
   signupText: {
     textAlign: "center",
     marginTop: "1rem",
+    color: "#333",
   },
   signupLink: {
-    color: "#007bff",
-    textDecoration: "none",
+    color: "#000", // black link
+    textDecoration: "underline",
   },
 };
 
