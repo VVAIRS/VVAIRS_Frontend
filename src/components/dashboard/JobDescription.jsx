@@ -6,37 +6,31 @@ const JobDescription = ({ jdText = "", onJdChange, variant = "full", onExpand })
     // Widget Mode (Card view)
     if (variant === "widget") {
         return (
-            <div className="h-full flex flex-col bg-white rounded-2xl shadow-sm overflow-hidden">
-                <div className="p-6 border-b border-gray-100">
-                    <h2 className="text-xl font-bold text-gray-900">Job Description</h2>
-                </div>
-
-                <div className="flex-1 p-6 flex flex-col items-center justify-center">
+            <div className="h-full flex flex-col bg-white rounded-2xl shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                <div className="flex-1 p-4 flex flex-col items-center justify-center">
                     {jdText ? (
                         <div
                             onClick={onExpand}
-                            className="w-full h-full text-left cursor-pointer group"
+                            className="w-full h-full text-left cursor-pointer relative"
                         >
-                            <p className="text-gray-600 text-sm line-clamp-6 mb-4">
+                            <div className="absolute top-0 right-0 p-2 bg-gradient-to-l from-white via-white to-transparent">
+                                <ExternalLink className="w-4 h-4 text-indigo-600" />
+                            </div>
+                            <p className="text-gray-600 text-sm p-2 h-full overflow-hidden text-ellipsis">
                                 {jdText}
                             </p>
-                            <div className="flex items-center text-indigo-600 font-medium text-sm group-hover:text-indigo-800 transition-colors">
-                                View Full JD
-                                <ExternalLink className="w-4 h-4 ml-1" />
-                            </div>
                         </div>
                     ) : (
                         <div
                             onClick={onExpand}
-                            className="w-full h-full border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 flex flex-col items-center justify-center text-center p-8 hover:border-indigo-400 hover:bg-indigo-50 transition-all cursor-pointer group"
+                            className="w-full h-full border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 flex flex-col items-center justify-center text-center p-4 hover:border-indigo-400 hover:bg-indigo-50 transition-all cursor-pointer"
                         >
-                            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                                <FileText className="w-8 h-8 text-indigo-600" />
+                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 transition-transform">
+                                <FileText className="w-6 h-6 text-indigo-600" />
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">View Full JD</h3>
-                            <p className="text-gray-500 text-sm flex items-center">
-                                Click to view details
-                                <ExternalLink className="w-3 h-3 ml-1" />
+                            <h3 className="text-sm font-semibold text-gray-900 mb-1">Job Description</h3>
+                            <p className="text-gray-500 text-xs flex items-center">
+                                View or Edit
                             </p>
                         </div>
                     )}

@@ -31,14 +31,7 @@ const JobsList = ({ onSelectJob }) => {
             console.error("Failed to fetch jobs:", err);
             setError('Failed to load jobs');
             setLoading(false);
-            // Fallback mock data
-            if (err.response?.status === 404 || err.code === "ERR_NETWORK") {
-                setJobs([
-                    { id: 1, title: 'Job title 1', status: 'Queued', jd_text: 'Sample JD for Job 1' },
-                    { id: 2, title: 'Job title 2', status: 'Completed', jd_text: 'Sample JD for Job 2' },
-                    { id: 3, title: 'Job title 3', status: 'Processing', jd_text: 'Sample JD for Job 3' },
-                ]);
-            }
+            // No fallback data - rely on backend
         }
     };
 

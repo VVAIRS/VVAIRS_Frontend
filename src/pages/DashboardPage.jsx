@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import Navbar from "../components/Navbar";
 import JobsList from "../components/dashboard/JobsList";
 import JobDescription from "../components/dashboard/JobDescription";
@@ -15,6 +16,7 @@ const DashboardPage = () => {
   const [jdText, setJdText] = useState("");
   const [isJdModalOpen, setIsJdModalOpen] = useState(false);
   const [loadingJd, setLoadingJd] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -55,58 +57,77 @@ const DashboardPage = () => {
       <Navbar isLoggedIn={true} onLogout={handleLogout} />
 
       {/* Main Container - Full Width */}
-      <main className="w-full px-4 sm:px-6 lg:px-8 py-8 pt-24">
-        <div className="grid grid-cols-12 gap-6 h-[calc(100vh-8rem)]">
+      <main className="w-full h-[calc(100vh-4rem)] flex pt-16 relative">
 
-          {/* COLUMN 1: Jobs List (Left) - approx 25% */}
-          <div className="col-span-12 lg:col-span-3 bg-white rounded-2xl shadow-sm h-full overflow-hidden">
+        {/* SIDEBAR: Jobs List (Left) - Collapsible */}
+        <aside
+          className={`${isSidebarOpen ? 'w-80 translate-x-0' : 'w-0 -translate-x-full'} bg-white border-r border-gray-200 h-full overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out relative`}
+        >
+          <div className="w-80 h-full">
             <JobsList onSelectJob={handleJobSelect} />
           </div>
+        </aside>
 
-          {/* COLUMN 2: Main Work Area (Middle) - approx 40% */}
-          <div className="col-span-12 lg:col-span-5 h-full flex flex-col gap-6">
+        {/* Toggle Button (Floating or attached) */}
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="absolute top-20 left-4 z-10 p-2 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 text-gray-600 transition-all"
+          style={{ left: isSidebarOpen ? '20.5rem' : '1rem' }}
+        >
+          {isSidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
+        </button>
 
-            {/* 1. Top Row: JD Widget & Resume Uploader (Side-by-Side) */}
-            <div className="h-1/2 grid grid-cols-2 gap-4">
-              <JobDescription variant="widget" jdText={jdText} onExpand={() => setIsJdModalOpen(true)} />
-              <ResumeUploader />
+        {/* MAIN CONTENT AREA (Right) - Scrollable */}
+        <div className="flex-1 overflow-y-auto bg-gray-50 p-6 transition-all duration-300">
+          <div className="flex gap-6 h-full">
+
+            {/* COLUMN 1: Main Work Area (Middle) - Grows to fill space */}
+            <div className="flex-1 flex flex-col gap-6 min-w-0">
+
+              {/* 1. Top Row: Square Widgets (JD & Uploader) */}
+              <div className="grid grid-cols-3 gap-6">
+                <div className="aspect-square w-full">
+                  <JobDescription variant="widget" jdText={jdText} onExpand={() => setIsJdModalOpen(true)} />
+                </div>
+                <div className="aspect-square w-full">
+                  <ResumeUploader />
+                </div>
+                <div className="aspect-square w-full bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
+                  Stats/Other Widgets Placeholder
+                </div>
+              </div>
+
+              {/* 2. Placeholder: Tabs (Cards, Table, Flagged) */}
+              <div className="h-12 bg-gray-200 rounded-lg animate-pulse flex items-center justify-center text-gray-400 text-sm font-medium">
+                Tabs Placeholder
+              </div>
+
+              {/* 3. User Table - Takes remaining vertical space */}
+              <div className="flex-1 min-h-[500px] bg-white rounded-2xl shadow-sm border border-gray-200 flex items-center justify-center text-gray-400 font-medium">
+                User Table (Real Data Here)
+              </div>
             </div>
 
-            {/* 2. Placeholder: Tabs (Cards, Table, Flagged) */}
-            <div className="h-12 bg-gray-200 rounded-lg animate-pulse flex items-center justify-center text-gray-400 text-sm font-medium">
-              Tabs Placeholder
+            {/* COLUMN 2: Stats & Charts (Right) - Fixed Width */}
+            <div className="w-80 flex-shrink-0 flex flex-col gap-6">
+
+              {/* 1. Placeholder: Top Stats (Total, Completed, Credits) */}
+              <div className="h-24 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
+                Top Stats Placeholder
+              </div>
+
+              {/* 2. Placeholder: Pie Chart (Resume Score) */}
+              <div className="aspect-square bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
+                Pie Chart Placeholder
+              </div>
+
+              {/* 3. Placeholder: Bar Chart (Score Distribution) */}
+              <div className="aspect-square bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
+                Bar Chart Placeholder
+              </div>
             </div>
 
-            {/* 3. Placeholder: User Table */}
-            <div className="flex-1 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
-              User Table Placeholder
-            </div>
           </div>
-
-          {/* COLUMN 3: Stats & Charts (Right) - approx 35% */}
-          <div className="col-span-12 lg:col-span-4 h-full flex flex-col gap-6">
-
-            {/* 1. Placeholder: Top Stats (Total, Completed, Credits) */}
-            <div className="h-24 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
-              Top Stats Placeholder
-            </div>
-
-            {/* 2. Placeholder: Pie Chart (Resume Score) */}
-            <div className="h-64 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
-              Pie Chart Placeholder
-            </div>
-
-            {/* 3. Placeholder: Bar Chart (Score Distribution) */}
-            <div className="h-48 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
-              Bar Chart Placeholder
-            </div>
-
-            {/* 4. Placeholder: Line Chart (Resumes Over Time) */}
-            <div className="flex-1 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium">
-              Line Chart Placeholder
-            </div>
-          </div>
-
         </div>
       </main>
 
