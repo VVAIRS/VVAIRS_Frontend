@@ -4,7 +4,7 @@ import { MoreHorizontal, Plus } from 'lucide-react';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const JobsList = ({ onSelectJob }) => {
+const JobsList = ({ onSelectJob, onNewJobClick, draftJob, onDraftTitleChange }) => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -59,6 +59,29 @@ const JobsList = ({ onSelectJob }) => {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Jobs</h2>
 
             <div className="flex-1 overflow-y-auto space-y-4 pr-2">
+                {/* Draft Job Card */}
+                {draftJob && (
+                    <div className="p-4 rounded-xl shadow-sm border border-indigo-500 ring-1 ring-indigo-500 bg-white cursor-pointer transition-all duration-200">
+                        <div className="flex justify-between items-start mb-2">
+                            <input
+                                type="text"
+                                value={draftJob.title}
+                                onChange={(e) => onDraftTitleChange(e.target.value)}
+                                placeholder="Enter Job Title..."
+                                autoFocus
+                                className="font-semibold text-gray-800 text-lg w-full outline-none bg-transparent placeholder-gray-400"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        </div>
+                        <div className="flex justify-between items-center mt-2">
+                            <span className="text-sm text-gray-500">Draft</span>
+                            <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-indigo-100 text-indigo-800">
+                                New
+                            </span>
+                        </div>
+                    </div>
+                )}
+
                 {loading ? (
                     <p className="text-gray-500 text-center">Loading jobs...</p>
                 ) : error ? (
@@ -88,7 +111,10 @@ const JobsList = ({ onSelectJob }) => {
                 )}
             </div>
 
-            <button className="mt-6 w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-colors flex items-center justify-center">
+            <button
+                onClick={onNewJobClick}
+                className="mt-6 w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-colors flex items-center justify-center"
+            >
                 <Plus className="w-5 h-5 mr-2" />
                 New Job
             </button>
