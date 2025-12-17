@@ -4,18 +4,18 @@ import { MoreHorizontal, Plus } from 'lucide-react';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const JobsList = ({ onSelectJob, onNewJobClick, draftJob, onDraftTitleChange }) => {
+const JobsList = ({ onSelectJob, onNewJobClick, draftJob, onDraftTitleChange, refreshTrigger, activeJobId }) => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [selectedJobId, setSelectedJobId] = useState(null);
 
     useEffect(() => {
         fetchJobs();
-    }, []);
+    }, [refreshTrigger]);
 
     const fetchJobs = async () => {
         try {
+            // setLoading(true); // Optional: Don't show loading on refresh to avoid flickering
             const token = localStorage.getItem('token');
             const response = await axios.get(`${API_BASE_URL}/api/jobs/`, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -36,7 +36,6 @@ const JobsList = ({ onSelectJob, onNewJobClick, draftJob, onDraftTitleChange }) 
     };
 
     const handleJobClick = (job) => {
-        setSelectedJobId(job.id);
         if (onSelectJob) {
             onSelectJob(job);
         }
@@ -56,6 +55,7 @@ const JobsList = ({ onSelectJob, onNewJobClick, draftJob, onDraftTitleChange }) 
 
     return (
         <div className="flex flex-col h-full bg-gray-50 p-4 rounded-xl">
+            {/* ... header ... */}
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Jobs</h2>
 
             <div className="flex-1 overflow-y-auto space-y-4 pr-2">
@@ -92,7 +92,7 @@ const JobsList = ({ onSelectJob, onNewJobClick, draftJob, onDraftTitleChange }) 
                             key={job.id}
                             onClick={() => handleJobClick(job)}
                             className={`p-4 rounded-xl shadow-sm border cursor-pointer transition-all duration-200 
-                                ${selectedJobId === job.id ? 'border-gray-800 ring-1 ring-gray-800 bg-white' : 'border-gray-100 bg-white hover:shadow-md'}`}
+                                ${activeJobId === job.id ? 'border-gray-800 ring-1 ring-gray-800 bg-white' : 'border-gray-100 bg-white hover:shadow-md'}`}
                         >
                             <div className="flex justify-between items-start mb-2">
                                 <h3 className="font-semibold text-gray-800 text-lg">{job.title}</h3>

@@ -23,7 +23,7 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
         e.preventDefault();
     };
 
-    const isValid = files.length >= 10;
+    const isValid = files.length > 0;
 
     return (
         <div className="h-full flex flex-col bg-white rounded-2xl shadow-sm overflow-hidden group hover:shadow-md transition-shadow relative">
@@ -33,7 +33,7 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
                 <div className="flex justify-between items-center mb-4 shrink-0">
                     <div className="flex items-center gap-2">
                         <h3 className="font-bold text-gray-900 text-lg">Resumes</h3>
-                        <span className={`text-sm font-medium px-2 py-1 rounded-full ${files.length >= 10 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
+                        <span className={`text-sm font-medium px-2 py-1 rounded-full ${files.length > 0 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
                             {files.length}
                         </span>
                     </div>
@@ -43,7 +43,7 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
                         <button
                             onClick={onSubmit}
                             disabled={!isValid}
-                            title={isValid ? "Create Job" : "Add 10+ resumes to create"}
+                            title={isValid ? "Create Job" : "Add at least 1 resume to create"}
                             className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200
                                 ${isValid
                                     ? 'bg-indigo-600 text-white shadow-md hover:bg-indigo-700 hover:scale-105'
@@ -98,7 +98,7 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
                     <div className="mt-2 pt-2 border-t border-gray-100 shrink-0">
                         <p className="text-sm text-center text-red-400 flex items-center justify-center">
                             <AlertCircle className="w-4 h-4 mr-1" />
-                            Need {10 - files.length} more
+                            Please upload at least one resume
                         </p>
                     </div>
                 )}

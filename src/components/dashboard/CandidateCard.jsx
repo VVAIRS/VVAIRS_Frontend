@@ -2,16 +2,22 @@ import React from 'react';
 import { User, Mail, Phone, FileText } from 'lucide-react';
 
 const CandidateCard = ({ candidate }) => {
-    const { name, match_score, reasoning, email, phone } = candidate;
+    const { name, match_score, reasoning, email, phone, status } = candidate;
 
-    const getScoreColor = (score) => {
-        if (score >= 80) return 'text-green-600 bg-green-50 ring-green-500/20';
-        if (score >= 50) return 'text-yellow-600 bg-yellow-50 ring-yellow-500/20';
-        return 'text-red-600 bg-red-50 ring-red-500/20';
+    const getStatusColor = (status) => {
+        const s = (status || '').toLowerCase().replace(/_/g, '').replace(/ /g, '');
+
+        if (s.includes('shortlist')) return 'text-green-600 bg-green-50 ring-green-500/20';
+        if (s.includes('qualified') && !s.includes('not')) return 'text-green-600 bg-green-50 ring-green-500/20';
+
+        if (s.includes('reject') || s.includes('notqualified')) return 'text-red-600 bg-red-50 ring-red-500/20';
+
+        // Default / Under Review
+        return 'text-yellow-600 bg-yellow-50 ring-yellow-500/20';
     };
 
     return (
-        <div className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col h-full">
+        <div className="bg-white rounded-3xl p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow flex flex-col h-full">
             {/* Header: Name & Score */}
             <div className="flex justify-between items-start mb-2">
                 <div className="flex items-center gap-3">
@@ -30,7 +36,7 @@ const CandidateCard = ({ candidate }) => {
                         </div>
                     </div>
                 </div>
-                <div className={`px-3 py-1 rounded-lg text-sm font-bold ring-1 ring-inset ${getScoreColor(match_score)}`}>
+                <div className={`px-3 py-1 rounded-lg text-sm font-bold ring-1 ring-inset ${getStatusColor(status)}`}>
                     {match_score}%
                 </div>
             </div>
