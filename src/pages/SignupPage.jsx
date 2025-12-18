@@ -108,7 +108,7 @@ const SignupPage = () => {
     return (
         <div className="w-full flex justify-center items-center">
             <div className={commonStyles.card}>
-                <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">VVAIRS</h2>
+                <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">ResumeZai</h2>
 
                 {error && <p className={`${commonStyles.error} mb-4`}>{error}</p>}
                 {success && <p className={`${commonStyles.success} mb-4`}>{success}</p>}
@@ -171,8 +171,8 @@ const SignupPage = () => {
                             type="button"
                             onClick={handleSendCode}
                             className={`${sendCodeButtonStyle} ${isCodeSent
-                                    ? 'bg-gray-500 text-white hover:bg-gray-600'
-                                    : 'bg-gray-800 text-white hover:bg-gray-700'
+                                ? 'bg-gray-500 text-white hover:bg-gray-600'
+                                : 'bg-gray-800 text-white hover:bg-gray-700'
                                 }`}
                             disabled={loading || isCodeSent}
                         >

@@ -89,6 +89,12 @@ const LoginPage = () => {
           {loading ? "Logging in..." : "Login"}
         </button>
 
+        <div style={{ textAlign: 'right', marginTop: '10px' }}>
+          <Link to="/ForgotPassword" style={{ color: '#000', fontSize: '0.9rem', textDecoration: 'underline' }}>
+            Forgot Password?
+          </Link>
+        </div>
+
         <p style={styles.signupText}>
           Don't have an account?{" "}
           <Link to="/signup" style={styles.signupLink}>

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { Upload, FileText, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { Upload, FileText, CheckCircle, AlertCircle, ArrowRight, Trash2 } from 'lucide-react';
 
-const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true }) => {
+const ResumeUploader = ({ files = [], candidates = [], onFilesChange, onRemoveFile, onSubmit, isEditable = true }) => {
     const fileInputRef = useRef(null);
 
     const handleFileChange = (e) => {
@@ -23,7 +23,12 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
         e.preventDefault();
     };
 
-    const isValid = files.length > 0;
+    // Validate file size (Max 5MB)
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+    const isValidFile = (file) => file.size <= MAX_SIZE;
+
+    const validFilesCount = files.filter(isValidFile).length;
+    const isValid = validFilesCount > 0;
 
     return (
         <div className="h-full flex flex-col bg-white rounded-2xl shadow-sm overflow-hidden group hover:shadow-md transition-shadow relative">
@@ -33,8 +38,8 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
                 <div className="flex justify-between items-center mb-4 shrink-0">
                     <div className="flex items-center gap-2">
                         <h3 className="font-bold text-gray-900 text-lg">Resumes</h3>
-                        <span className={`text-sm font-medium px-2 py-1 rounded-full ${files.length > 0 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
-                            {files.length}
+                        <span className={`text-sm font-medium px-2 py-1 rounded-full ${validFilesCount > 0 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
+                            {isEditable ? `${validFilesCount} / ${files.length}` : candidates.length}
                         </span>
                     </div>
 
@@ -43,7 +48,7 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
                         <button
                             onClick={onSubmit}
                             disabled={!isValid}
-                            title={isValid ? "Create Job" : "Add at least 1 resume to create"}
+                            title={isValid ? "Create Job (Valid files only)" : "Add at least 1 valid resume (<5MB)"}
                             className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200
                                 ${isValid
                                     ? 'bg-indigo-600 text-white shadow-md hover:bg-indigo-700 hover:scale-105'
@@ -76,19 +81,56 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
                             <p className="text-gray-600 text-sm font-medium">Click or Drop</p>
                         </div>
                     ) : (
-                        files.length === 0 && <p className="text-gray-400 text-sm text-center italic mt-4">No resumes uploaded.</p>
+                        null
                     )}
 
                     {/* Scrollable File List */}
                     <div className="flex-1 overflow-y-auto custom-scrollbar pr-1">
                         <div className="space-y-2">
-                            {files.map((file, index) => (
-                                <div key={index} className="flex items-center p-2 bg-gray-50 rounded-lg border border-gray-100">
-                                    <FileText className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
-                                    <span className="text-sm text-gray-700 truncate flex-1">{file.name}</span>
+                            {/* DRAFT MODE: Show Uploaded Files */}
+                            {isEditable && files.map((file, index) => (
+                                <div key={index} className={`flex items-center p-2 rounded-lg border ${isValidFile(file) ? 'bg-gray-50 border-gray-100' : 'bg-red-50 border-red-100'}`}>
+                                    <FileText className={`w-4 h-4 mr-2 shrink-0 ${isValidFile(file) ? 'text-gray-400' : 'text-red-400'}`} />
+                                    <div className="flex-1 min-w-0">
+                                        <p className={`text-sm truncate ${isValidFile(file) ? 'text-gray-700' : 'text-red-700'}`}>{file.name}</p>
+                                        {!isValidFile(file) && <p className="text-[10px] text-red-500">File too large (&gt;5MB)</p>}
+                                    </div>
+
+                                    {/* Remove Button */}
+                                    <button
+                                        onClick={(e) => { e.stopPropagation(); onRemoveFile(index); }}
+                                        className="p-1 hover:bg-gray-200 rounded-full text-gray-400 hover:text-red-500 transition-colors ml-1"
+                                        title="Remove file"
+                                    >
+                                        <Trash2 className="w-4 h-4" />
+                                    </button>
+
+                                    {/* Status Icon */}
+                                    {isValidFile(file) ? (
+                                        <CheckCircle className="w-4 h-4 text-green-500 shrink-0 ml-1" />
+                                    ) : (
+                                        <AlertCircle className="w-4 h-4 text-red-500 shrink-0 ml-1" />
+                                    )}
+                                </div>
+                            ))}
+
+                            {/* VIEW MODE: Show Processed Candidates */}
+                            {!isEditable && candidates.map((candidate, index) => (
+                                <div key={candidate.id || index} className="flex items-center p-2 bg-white rounded-lg border border-gray-100 shadow-sm">
+                                    <FileText className="w-4 h-4 text-indigo-400 mr-2 shrink-0" />
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium text-gray-700 truncate">{candidate.name || `Candidate ${index + 1}`}</p>
+                                        <p className="text-[10px] text-gray-400 truncate">{candidate.email || 'Processed'}</p>
+                                    </div>
                                     <CheckCircle className="w-4 h-4 text-green-500 shrink-0 ml-2" />
                                 </div>
                             ))}
+
+                            {!isEditable && candidates.length === 0 && (
+                                <div className="text-center py-4 text-gray-400 text-sm">
+                                    No candidates processed yet.
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -98,7 +140,7 @@ const ResumeUploader = ({ files = [], onFilesChange, onSubmit, isEditable = true
                     <div className="mt-2 pt-2 border-t border-gray-100 shrink-0">
                         <p className="text-sm text-center text-red-400 flex items-center justify-center">
                             <AlertCircle className="w-4 h-4 mr-1" />
-                            Please upload at least one resume
+                            Please upload at least one valid resume (Max 5MB)
                         </p>
                     </div>
                 )}

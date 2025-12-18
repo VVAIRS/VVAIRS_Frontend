@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, User, LogOut, LogIn, UserPlus, Home } from 'lucide-react';
+import axios from 'axios';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // NOTE: All navigation is now handled using standard <a> tags with explicit href paths
 // or buttons with the 'onLogout' handler. This avoids conflicts with external router setups.
@@ -12,7 +15,32 @@ const Navbar = ({
     logoUrl = "/src/assets/airs-logo.png"
 }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [balance, setBalance] = useState(null); // State for remaining balance
+
     const closeMenu = () => setIsMenuOpen(false); // Helper to close menu on click
+
+    // Fetch user balance when logged in
+    useEffect(() => {
+        const fetchBalance = async () => {
+            if (isLoggedIn) {
+                try {
+                    const token = localStorage.getItem('token');
+                    if (!token) return;
+
+                    // Updated endpoint based on Swagger/Curl confirmation
+                    const response = await axios.get(`${API_BASE_URL}/api/jobs/stats`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+
+                    setBalance(response.data.stats.remaining_balance);
+                } catch (error) {
+                    console.error("Failed to fetch balance:", error);
+                }
+            }
+        };
+
+        fetchBalance();
+    }, [isLoggedIn]);
 
     // Custom class for the shining gray buttons (using Tailwind CSS)
     const buttonClass = (isPrimary = false) =>
@@ -34,7 +62,15 @@ const Navbar = ({
 
         if (isLoggedIn) {
             return (
-                <div className={`${className} relative`}>
+                <div className={`${className} relative flex items-center`}>
+
+                    {/* BALANCE DISPLAY */}
+                    {balance !== null && (
+                        <div className={`mr-6 bg-green-100 text-green-800 font-semibold text-sm px-3 py-1 rounded-full ${isMobile ? 'mb-2' : ''}`}>
+                            ${typeof balance === 'number' ? balance.toFixed(2) : balance}
+                        </div>
+                    )}
+
                     {/* 2. PROFILE DROPDOWN */}
                     <div className="relative">
                         <button
@@ -112,7 +148,7 @@ const Navbar = ({
                                 <img src={logoUrl} alt="AIRS Logo" className="w-full h-full object-contain filter invert" />
                             </div>
                             <span className="text-2xl font-extrabold tracking-tight text-gray-900">
-                                VVAIRS<span className="text-indigo-500">.</span>
+                                ResumeZai<span className="text-indigo-500">.</span>
                             </span>
                         </a>
                     </div>

@@ -77,6 +77,7 @@ const DashboardPage = () => {
       fetchJobDetails(selectedJob.id, false);
     } else {
       setCandidates([]);
+      setLoadedCandidateCount(0); // Reset count when clearing
     }
   }, [selectedJob?.id, dataRefreshTrigger]);
 
@@ -91,6 +92,7 @@ const DashboardPage = () => {
       setLoadedCandidateCount(response.data.length);
     } catch (err) {
       console.error("Failed to fetch candidates:", err);
+      setUploadState(prev => ({ ...prev, stage: 'idle' })); // STOP POLLING ON ERROR
     } finally {
       if (showLoader) setLoadingCandidates(false);
     }
@@ -118,6 +120,7 @@ const DashboardPage = () => {
       }
     } catch (err) {
       console.error("Failed to fetch job details:", err);
+      setUploadState(prev => ({ ...prev, stage: 'idle' })); // STOP POLLING ON ERROR
     } finally {
       if (updateLoading) setLoadingJd(false);
     }
@@ -126,7 +129,9 @@ const DashboardPage = () => {
   const handleJobSelect = async (job) => {
     setDraftJob(null); // Exit draft mode
     setSelectedJob(job);
+    setSelectedJob(job);
     setCandidates([]); // Clear previous candidates immediately
+    setLoadedCandidateCount(0); // Reset count immediately
     // Optimistically set JD if available in the list object
     if (job.jd_text) {
       setJdText(job.jd_text);
@@ -157,14 +162,30 @@ const DashboardPage = () => {
     if (field === 'jd_text') setJdText(value);
   };
 
+  const handleRemoveFile = (indexToRemove) => {
+    setDraftJob(prev => ({
+      ...prev,
+      files: prev.files.filter((_, index) => index !== indexToRemove)
+    }));
+  };
+
   const handleCreateJob = async () => {
     if (!draftJob || !draftJob.title || draftJob.files.length < 1) return; // Allow 1 for testing
 
+    // Filter out invalid files (Size > 5MB)
+    const MAX_SIZE = 5 * 1024 * 1024;
+    const validFiles = draftJob.files.filter(file => file.size <= MAX_SIZE);
+
+    if (validFiles.length === 0) {
+      alert("No valid files to upload. Please check file sizes (<5MB).");
+      return;
+    }
+
     const BATCH_SIZE = 5;
-    const totalFiles = draftJob.files.length;
+    const totalFiles = validFiles.length;
     const totalBatches = Math.ceil(totalFiles / BATCH_SIZE);
 
-    console.log(`[DEBUG] Starting Upload. Total Files: ${totalFiles}, Batch Size: ${BATCH_SIZE}, Total Batches: ${totalBatches}`);
+    console.log(`[DEBUG] Starting Upload. Total Valid Files: ${totalFiles}, Batch Size: ${BATCH_SIZE}, Total Batches: ${totalBatches}`);
 
     try {
       // Initial State
@@ -177,7 +198,7 @@ const DashboardPage = () => {
       let jobId = null;
 
       // --- BATCH 1: Create Job & Immediate View Switch ---
-      const batch1Files = draftJob.files.slice(0, BATCH_SIZE);
+      const batch1Files = validFiles.slice(0, BATCH_SIZE);
       console.log(`[DEBUG] Batch 1 (Create) - Files: ${batch1Files.length}`);
 
       const formData1 = new FormData();
@@ -219,7 +240,7 @@ const DashboardPage = () => {
       for (let i = 1; i < totalBatches; i++) {
         const start = i * BATCH_SIZE;
         const end = Math.min(start + BATCH_SIZE, totalFiles);
-        const batchFiles = draftJob.files.slice(start, end);
+        const batchFiles = validFiles.slice(start, end);
         console.log(`[DEBUG] Batch ${i + 1} (Append) - Files: ${batchFiles.length} (Index ${start} to ${end})`);
 
         const formData = new FormData();
@@ -247,17 +268,9 @@ const DashboardPage = () => {
       console.log(`[DEBUG] All batches completed.`);
       setUploadState(prev => ({ ...prev, stage: 'completed' }));
 
-      // Fixed 120s window (increased due to backend delay) to keep polling
-      // Fixed 120s window (increased due to backend delay) to keep polling
-      // NOTE: Smart polling will likely stop this sooner
-      setTimeout(() => {
-        // Only force idle if we haven't already finished via smart polling
-        setUploadState(prev => {
-          if (prev.stage !== 'idle') return { ...prev, stage: 'idle' };
-          return prev;
-        });
-        setDataRefreshTrigger(prev => prev + 1);
-      }, 120000);
+      // We rely completely on the 'Smart Polling' useEffect (lines 43-61) to stop 
+      // when loadedCandidateCount matches the total files.
+      // No artificial timeout is required.
 
     } catch (err) {
       console.error("[DEBUG] Failed to create job:", err);
@@ -322,7 +335,9 @@ const DashboardPage = () => {
                 <div className="h-64 w-full">
                   <ResumeUploader
                     files={draftJob ? draftJob.files : []}
+                    candidates={draftJob ? [] : candidates} // Pass candidates when not in draft mode
                     onFilesChange={(files) => handleDraftUpdate('files', files)}
+                    onRemoveFile={handleRemoveFile}
                     onSubmit={handleCreateJob}
                     isEditable={!!draftJob}
                   />
