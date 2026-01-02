@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography, Box, Tabs, Tab, Link, Button, Stack } from "@mui/material";
+import { Typography, Box, Tabs, Tab, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CandidatesGrid from "../components/CandidatesGrid";
 import CandidatesCards from "../components/CandidatesCard";

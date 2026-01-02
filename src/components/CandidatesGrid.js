@@ -11,7 +11,7 @@ export default function CandidatesGrid({ onDataLoaded }) {
 
     useEffect(() => {
         initCandidates(jobId);
-    }, [jobId]);
+    }, [jobId, initCandidates]);
 
     /* 🔹 Send data to parent for export */
     useEffect(() => {
@@ -201,7 +201,7 @@ export default function CandidatesGrid({ onDataLoaded }) {
                 </Typography>
             ),
         },
-    ], []);
+    ], [statusStyles, styles.statusChip]);
 
     return (
         <Box sx={styles.container}>

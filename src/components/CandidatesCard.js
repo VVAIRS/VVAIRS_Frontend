@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import useCandidates from "../hooks/useCandidates";
 import CandidateCardTemplate from "./CandidateCardTemplate";
@@ -31,11 +31,11 @@ export default function CandidatesCards({ onDataLoaded }) {
         initCandidates,
     } = useCandidates();
 
-    const safeCandidates = Array.isArray(candidatesData) ? candidatesData : [];
+    const safeCandidates = useMemo(() => Array.isArray(candidatesData) ? candidatesData : [], [candidatesData]);
 
     useEffect(() => {
         initCandidates(jobId);
-    }, [jobId]);
+    }, [jobId, initCandidates]);
 
     useEffect(() => {
         onDataLoaded?.(safeCandidates);
