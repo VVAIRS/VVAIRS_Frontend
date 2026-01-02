@@ -32,7 +32,7 @@ export default function Charts() {
     useEffect(() => {
         fetchJobById(jobId);
         initCandidates(jobId);
-    }, [jobId]);
+    }, [jobId, fetchJobById, initCandidates]);
 
     /* ---------------- CANDIDATE STATUS COUNTS ---------------- */
     const statusCounts = useMemo(() => {
