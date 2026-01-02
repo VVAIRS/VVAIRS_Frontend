@@ -9,7 +9,6 @@ import {
     Stack,
     IconButton,
     Divider,
-    LinearProgress
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";

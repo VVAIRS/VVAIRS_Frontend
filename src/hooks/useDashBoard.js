@@ -9,7 +9,7 @@ export default function useDashboard() {
     const notification = useContext(NotificationContext);
     const [rows, setRows] = useState([]);
     const { data: jobsData, loading, request: jobsRequest } = useAPI(fetchJobsApi);
-    const { data: jobData, loading: jobLoading, request: jobRequest } = useAPI(fetchJobByIdApi);
+    const { data: jobData, request: jobRequest } = useAPI(fetchJobByIdApi);
     const hasFetched = useRef(false);
     useEffect(() => {
         if (hasFetched.current) return;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { IconButton, Stack, Chip, Box, Paper } from "@mui/material";
-import { DeleteOutlined, Edit, VisibilityOutlined } from "@mui/icons-material";
+import { DeleteOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import DataGrid from "./common/DataGrid";
 import DeleteModal from "./common/DeleteModal";
