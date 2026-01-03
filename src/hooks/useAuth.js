@@ -21,7 +21,7 @@ const useAuth = () => {
             const res = await login(data);
 
             if (res?.data?.token) {
-                navigate("/DashboardPage");
+                navigate("/");
             } else {
                 setMessage({ type: "error", text: "Login failed" });
             }
