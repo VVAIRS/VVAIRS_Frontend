@@ -166,7 +166,7 @@ const LoginPage = () => {
                         </Typography>
 
                         {/* Google OAuth Button */}
-                        {/* <Box sx={{ width: "150%", mb: 3 }}>
+                        <Box sx={{ width: "150%", mb: 3 }}>
                             <Button
                                 fullWidth
                                 variant="outlined"
@@ -203,7 +203,7 @@ const LoginPage = () => {
                                     OR
                                 </Typography>
                             </Divider>
-                        </Box> */}
+                        </Box>
 
                         <form onSubmit={loginHandleSubmit(loginUser)} style={{ width: "100%" }}>
                             <Stack spacing={3} width="150%">
