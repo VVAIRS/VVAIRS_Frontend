@@ -6,7 +6,7 @@ import CandidatesCards from "../components/CandidatesCard";
 import Charts from "./Charts";
 export default function CandidatesDashboardPage() {
     const [activeTab, setActiveTab] = useState(0);
-    const [setCandidatesData] = useState([]); // ✅ always array
+    const [candidatesData, setCandidatesData] = useState([]); // ✅ always array
     const navigate = useNavigate();
 
     const handleTabChange = (event, newValue) => {

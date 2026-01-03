@@ -63,7 +63,7 @@ const useAuth = () => {
                     type: "success",
                     text: "Signup successful! Redirecting...",
                 });
-                setTimeout(() => navigate("/DashboardPage"), 1000);
+                setTimeout(() => navigate("/"), 1000);
             }
         } catch (err) {
             setMessage({
