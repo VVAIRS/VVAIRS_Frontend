@@ -9,10 +9,27 @@ import {
     Backdrop,
     CircularProgress,
     Divider,
+    Container,
+    Paper,
+    CssBaseline,
 } from "@mui/material";
 import { Email, Lock } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { keyframes } from "@emotion/react";
+
+// Animations
+const gradientAnimation = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
+
+const floatAnimation = keyframes`
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+`;
 
 const LoginPage = () => {
     const {
@@ -20,278 +37,261 @@ const LoginPage = () => {
         loginHandleSubmit,
         loginErrors,
         loginLoading,
-        loginUser
+        loginUser,
     } = useAuth();
 
-    // Handle Google OAuth login
     const handleGoogleLogin = () => {
-        // Redirect to your backend Google OAuth endpoint
         window.location.href = `http://resumezai-cqfzgtffhheqfrfg.centralindia-01.azurewebsites.net/api/auth/login/google`;
     };
 
     return (
-        <>
-            {/* FULL PAGE LOADER */}
+        <Box
+            sx={{
+                minHeight: "100vh",
+                width: "100vw",
+                overflow: "hidden",
+                bgcolor: "#0f172a", // Fallback dark color
+                background: "radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%)",
+                position: 'relative',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "url('https://grainy-gradients.vercel.app/noise.svg')",
+                    opacity: 0.4,
+                    zIndex: 0,
+                    pointerEvents: "none",
+                }
+            }}
+        >
+            <CssBaseline />
+
+            {/* Moving Gradient Orbs for extra depth */}
+            <Box sx={{
+                position: 'absolute',
+                top: '-20%',
+                left: '-10%',
+                width: '50vw',
+                height: '50vw',
+                background: 'radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(0,0,0,0) 70%)',
+                animation: `${floatAnimation} 10s ease-in-out infinite`,
+                zIndex: 0,
+            }} />
+            <Box sx={{
+                position: 'absolute',
+                bottom: '-20%',
+                right: '-10%',
+                width: '60vw',
+                height: '60vw',
+                background: 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(0,0,0,0) 70%)',
+                animation: `${floatAnimation} 14s ease-in-out infinite reverse`,
+                zIndex: 0,
+            }} />
+
+            {/* Loader */}
             <Backdrop
                 open={loginLoading}
-                sx={{
-                    zIndex: (theme) => theme.zIndex.modal + 1,
-                    color: "#fff",
-                }}
+                sx={{ zIndex: (theme) => theme.zIndex.modal + 2, color: "#fff", backdropFilter: 'blur(5px)' }}
             >
-                <CircularProgress size={60} color="inherit" />
+                <CircularProgress size={60} thickness={4} sx={{ color: '#818cf8' }} />
             </Backdrop>
 
-            <Grid container component="main" sx={{ height: "100vh", width: "100%", m: 0 }}>
-                {/* LEFT SIDE – IMAGE */}
-                <Grid
-                    item
-                    xs={12}
-                    md={6}
+            {/* Login Card */}
+            <Container maxWidth="sm" sx={{ position: 'relative', zIndex: 1, perspective: '1000px' }}>
+                <Paper
+                    elevation={24}
                     sx={{
-                        backgroundImage: "url('/images/Signup.png')",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: { xs: 2, md: 4 },
-                        color: "white",
-                        position: "relative",
-                        "&::before": {
-                            content: '""',
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            backgroundColor: "rgba(0,0,0,0.5)",
-                        },
+                        p: { xs: 3, md: 5 },
+                        borderRadius: 4,
+                        bgcolor: "rgba(255, 255, 255, 0.9)", // slightly more opaque for legibility
+                        backdropFilter: "blur(20px)",
+                        border: "1px solid rgba(255, 255, 255, 0.8)",
+                        boxShadow: "0 20px 50px rgba(0,0,0,0.3)",
+                        transition: "transform 0.3s ease-in-out",
+                        "&:hover": {
+                            transform: "translateY(-5px)",
+                        }
                     }}
                 >
-                    <Box
-                        sx={{
-                            position: "relative",
-                            zIndex: 1,
-                            textAlign: "center",
-                            maxWidth: { xs: "90%", md: "80%" },
-                            px: 2,
-                        }}
-                    >
-                        <Typography
-                            variant="h2"
-                            fontWeight="bold"
-                            sx={{
-                                mb: 2,
-                                fontFamily: "'Roboto', sans-serif",
-                                textShadow: "2px 2px 4px rgba(0,0,0,0.7)",
-                                fontSize: { xs: "2rem", md: "3rem" },
-                            }}
-                        >
-                            Welcome to VVAIRS
-                        </Typography>
-
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                mb: 3,
-                                fontStyle: "italic",
-                                textShadow: "1px 1px 2px rgba(0,0,0,0.7)",
-                                fontSize: { xs: "1.2rem", md: "1.5rem" },
-                            }}
-                        >
-                            Revolutionizing the Future with Cutting-Edge Technology
-                        </Typography>
-
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                lineHeight: 1.6,
-                                textShadow: "1px 1px 2px rgba(0,0,0,0.7)",
-                                fontSize: { xs: "1rem", md: "1.1rem" },
-                            }}
-                        >
-                            Join thousands of innovators and experience seamless solutions tailored
-                            for tomorrow. Sign up now and be part of the next big thing!
-                        </Typography>
-                    </Box>
-                </Grid>
-
-                {/* RIGHT SIDE – FORM */}
-                <Grid
-                    item
-                    xs={12}
-                    md={5}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: 4,
-                        backgroundColor: "white",
-                        minHeight: "100vh",
-                    }}
-                >
-                    <Box
-                        sx={{
-                            width: "100%",
-                            maxWidth: 500,
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            ml: 12
-                        }}
-                    >
-                        <Typography
-                            variant="h4"
-                            align="center"
-                            fontWeight="bold"
-                            mb={1}
-                            ml={10}
-                            sx={{
-                                color: "#333",
-                                fontFamily: "'Roboto', sans-serif",
-                            }}
-                        >
-                            Login
-                        </Typography>
-
-                        <Typography
-                            variant="body1"
-                            align="center"
-                            color="text.secondary"
-                            sx={{ mb: 3, ml: 12 }}
-                        >
-                            Enter your credentials to continue
-                        </Typography>
-
-                        {/* Google OAuth Button */}
-                        <Box sx={{ width: "150%", mb: 3 }}>
-                            <Button
-                                fullWidth
-                                variant="outlined"
-                                size="large"
-                                onClick={handleGoogleLogin}
-                                disabled={loginLoading}
-                                sx={{
-                                    borderColor: "#dadce0",
-                                    color: "#3c4043",
-                                    textTransform: "none",
-                                    fontWeight: 500,
-                                    py: 1.5,
-                                    borderRadius: 2,
-                                    "&:hover": {
-                                        borderColor: "#d2d3d4",
-                                        backgroundColor: "#f8f9fa",
-                                    },
-                                    display: "flex",
-                                    gap: 2,
-                                    ml: 12,
-                                }}
-                            >
-                                <svg width="18" height="18" viewBox="0 0 18 18">
-                                    <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
-                                    <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" />
-                                    <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.96H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.04l3.007-2.333z" />
-                                    <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
-                                </svg>
-                                Continue with Google
-                            </Button>
-
-                            <Divider sx={{ my: 3, ml: 25 }}>
-                                <Typography variant="body2" color="text.secondary">
-                                    OR
-                                </Typography>
-                            </Divider>
+                    <Box textAlign="center" mb={4}>
+                        {/* Optional Logo Placeholder */}
+                        <Box sx={{
+                            width: 50,
+                            height: 50,
+                            bgcolor: '#4f46e5',
+                            borderRadius: '12px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mb: 2,
+                            boxShadow: '0 4px 10px rgba(79, 70, 229, 0.4)'
+                        }}>
+                            <Lock sx={{ color: 'white' }} />
                         </Box>
 
-                        <form onSubmit={loginHandleSubmit(loginUser)} style={{ width: "100%" }}>
-                            <Stack spacing={3} width="150%">
-                                <TextField
-                                    label="Email"
-                                    fullWidth
-                                    {...loginRegister("email", { required: "Email is required" })}
-                                    error={!!loginErrors.email}
-                                    helperText={loginErrors.email?.message}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <Email sx={{ color: "#667eea" }} />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                    sx={{
-                                        "& .MuiOutlinedInput-root": {
-                                            borderRadius: 2,
-                                        },
-                                    }}
-                                />
-
-                                <TextField
-                                    label="Password"
-                                    type="password"
-                                    fullWidth
-                                    {...loginRegister("password", { required: "Password is required" })}
-                                    error={!!loginErrors.password}
-                                    helperText={loginErrors.password?.message}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <Lock sx={{ color: "#667eea" }} />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                    sx={{
-                                        "& .MuiOutlinedInput-root": {
-                                            borderRadius: 2,
-                                        },
-                                    }}
-                                />
-
-                                <Button
-                                    type="submit"
-                                    size="large"
-                                    disabled={loginLoading}
-                                    sx={{
-                                        background:
-                                            "linear-gradient(45deg, #667eea 30%, #764ba2 90%)",
-                                        color: "white",
-                                        fontWeight: "bold",
-                                        borderRadius: 2,
-                                        py: 1.5,
-                                        minHeight: 48,
-                                        "&:hover": {
-                                            background:
-                                                "linear-gradient(45deg, #5a6fd8 30%, #6a4190 90%)",
-                                            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-                                        },
-                                        "&:disabled": {
-                                            background: "#ccc",
-                                        },
-                                    }}
-                                >
-                                    Login
-                                </Button>
-                            </Stack>
-                        </form>
-
-                        <Typography textAlign="center" mt={3} ml={12}>
-                            Don't have an account?{" "}
-                            <Link
-                                to="/signup"
-                                style={{
-                                    fontWeight: "bold",
-                                    color: "#667eea",
-                                    textDecoration: "none",
-                                }}
-                            >
-                                Sign Up
-                            </Link>
+                        <Typography
+                            variant="h4"
+                            fontWeight="800"
+                            gutterBottom
+                            sx={{
+                                background: "linear-gradient(to right, #1e293b, #334155)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                letterSpacing: '-0.5px'
+                            }}
+                        >
+                            Welcome Back
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ opacity: 0.8 }}>
+                            Please enter your details to sign in
                         </Typography>
                     </Box>
-                </Grid>
-            </Grid>
-        </>
+
+                    {/* Google Button */}
+                    <Button
+                        fullWidth
+                        variant="outlined"
+                        onClick={handleGoogleLogin}
+                        disabled={loginLoading}
+                        startIcon={
+                            <svg width="20" height="20" viewBox="0 0 18 18">
+                                <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                                <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" />
+                                <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.96H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.04l3.007-2.333z" />
+                                <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
+                            </svg>
+                        }
+                        sx={{
+                            mb: 3,
+                            py: 1.5,
+                            textTransform: "none",
+                            borderRadius: 2,
+                            borderColor: "#e2e8f0",
+                            color: "#475569",
+                            bgcolor: "#fff",
+                            fontWeight: 600,
+                            "&:hover": {
+                                bgcolor: "#f8fafc",
+                                borderColor: "#cbd5e1"
+                            }
+                        }}
+                    >
+                        Sign in with Google
+                    </Button>
+
+                    <Divider sx={{ mb: 3, "&::before, &::after": { borderColor: "#e2e8f0" } }}>
+                        <Typography variant="caption" color="text.secondary" fontWeight="bold">
+                            OR
+                        </Typography>
+                    </Divider>
+
+                    <form onSubmit={loginHandleSubmit(loginUser)}>
+                        <Stack spacing={2.5}>
+                            <TextField
+                                label="Email Address"
+                                fullWidth
+                                variant="outlined"
+                                {...loginRegister("email", { required: true })}
+                                error={!!loginErrors.email}
+                                helperText={loginErrors.email?.message}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <Email sx={{ color: '#64748b' }} />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        borderRadius: 2,
+                                        bgcolor: "#f8fafc",
+                                        "& fieldset": { borderColor: "#e2e8f0" },
+                                        "&:hover fieldset": { borderColor: "#94a3b8" },
+                                        "&.Mui-focused fieldset": { borderColor: "#6366f1" },
+                                    }
+                                }}
+                            />
+
+                            <TextField
+                                label="Password"
+                                type="password"
+                                fullWidth
+                                variant="outlined"
+                                {...loginRegister("password", { required: true })}
+                                error={!!loginErrors.password}
+                                helperText={loginErrors.password?.message}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <Lock sx={{ color: '#64748b' }} />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        borderRadius: 2,
+                                        bgcolor: "#f8fafc",
+                                        "& fieldset": { borderColor: "#e2e8f0" },
+                                        "&:hover fieldset": { borderColor: "#94a3b8" },
+                                        "&.Mui-focused fieldset": { borderColor: "#6366f1" },
+                                    }
+                                }}
+                            />
+
+                            <Button
+                                type="submit"
+                                fullWidth
+                                size="large"
+                                variant="contained"
+                                disabled={loginLoading}
+                                sx={{
+                                    py: 1.8,
+                                    mt: 1,
+                                    fontSize: '1rem',
+                                    fontWeight: "bold",
+                                    borderRadius: 2,
+                                    textTransform: "none",
+                                    background: "linear-gradient(to right, #4f46e5, #7c3aed)",
+                                    boxShadow: "0 4px 14px 0 rgba(79, 70, 229, 0.4)",
+                                    transition: "all 0.2s ease-in-out",
+                                    "&:hover": {
+                                        background: "linear-gradient(to right, #4338ca, #6d28d9)",
+                                        transform: "translateY(-1px)",
+                                        boxShadow: "0 6px 20px 0 rgba(79, 70, 229, 0.6)",
+                                    },
+                                    "&:disabled": {
+                                        background: "#ccc",
+                                        boxShadow: "none"
+                                    }
+                                }}
+                            >
+                                Log In
+                            </Button>
+                        </Stack>
+                    </form>
+
+                    <Typography mt={3} textAlign="center" variant="body2" color="text.secondary">
+                        Don’t have an account?{" "}
+                        <Link
+                            to="/signup"
+                            style={{
+                                fontWeight: 600,
+                                color: '#4f46e5',
+                                textDecoration: 'none'
+                            }}
+                        >
+                            Sign Up
+                        </Link>
+                    </Typography>
+                </Paper>
+            </Container>
+        </Box>
     );
 };
 
