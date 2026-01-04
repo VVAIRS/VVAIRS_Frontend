@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useCandidates from "../hooks/useCandidates";
 import CandidateCardTemplate from "./CandidateCardTemplate";
+import CandidateCardSkeleton from "./CandidateCardSkeleton";
 import {
     Grid,
     CircularProgress,
@@ -52,12 +53,31 @@ export default function CandidatesCards({ onDataLoaded }) {
     };
 
 
+    const LoadingSkeletons = () => (
+        <Box sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            px: 2,
+            justifyContent: { xs: "center", sm: "flex-start" }
+        }}>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => (
+                <Box
+                    key={item}
+                    sx={{
+                        width: { xs: "100%", sm: "435px", md: "435px" },
+                        flexGrow: 0,
+                        flexShrink: 0
+                    }}
+                >
+                    <CandidateCardSkeleton />
+                </Box>
+            ))}
+        </Box>
+    );
+
     if (candidatesLoading && !pollingLoading) {
-        return (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 6 }}>
-                <CircularProgress />
-            </Box>
-        );
+        return <LoadingSkeletons />;
     }
 
     return (
@@ -107,30 +127,29 @@ export default function CandidatesCards({ onDataLoaded }) {
                     No candidates found
                 </Typography>
             )}
-            <Grid container spacing={2} sx={{ px: 2 }}>
+            <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 2,
+                px: 2,
+                justifyContent: { xs: "center", sm: "flex-start" }
+            }}>
                 {safeCandidates.map((candidate) => (
-                    <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={3}
-                        lg={3}
-                        xl={3}
+                    <Box
+                        key={candidate.id}
                         sx={{
-                            flexBasis: { md: '24%', lg: '24%', xl: '24%' },
-                            maxWidth: { md: '24%', lg: '24%', xl: '24%' },
+                            width: { xs: "100%", sm: "435px", md: "435px" },
                             flexGrow: 0,
                             flexShrink: 0
                         }}
-                        key={candidate.id}
                     >
                         <CandidateCardTemplate
                             data={candidate}
                             onClick={() => handleCardClick(candidate)}
                         />
-                    </Grid>
+                    </Box>
                 ))}
-            </Grid>
+            </Box>
 
             <UploadResumesContainer
                 open={uploadOpen}
