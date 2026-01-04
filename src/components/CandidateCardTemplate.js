@@ -40,14 +40,15 @@ export default function CandidateCardTemplate({ data, onClick }) {
                 borderRadius: 3,
                 border: "1px solid",
                 borderColor: "divider",
-                height: "270px", // Fixed height for all cards
-                width: "100%", // Take full width of Grid item
-                minWidth: 0, // Allow shrinking to grid size implies strict control
-                maxWidth: "100%", // match parent
+                height: "250px", // Fixed height for uniformity
+                width: "100%",
+                minWidth: 0,
+                maxWidth: "100%",
                 cursor: "pointer",
                 transition: "0.25s",
                 display: "flex",
                 flexDirection: "column",
+                position: "relative", // Ensure positioning context if needed
                 "&:hover": {
                     boxShadow: 6,
                     borderColor: "primary.main",
@@ -60,7 +61,8 @@ export default function CandidateCardTemplate({ data, onClick }) {
                 flexGrow: 1,
                 display: 'flex',
                 flexDirection: 'column',
-                overflow: 'hidden' // Prevent content overflow
+                justifyContent: 'space-between', // Distribute space
+                overflow: 'hidden'
             }}>
                 {/* Header */}
                 <Box
