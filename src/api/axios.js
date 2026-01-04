@@ -2,8 +2,8 @@ import axios from "axios";
 
 const BASE_URL =
     window?.config?.ApiUrl ||
-    // "/api";
-    "https://resumezai-cqfzgtffhheqfrfg.centralindia-01.azurewebsites.net/api";
+    "/api";
+// "https://resumezai-cqfzgtffhheqfrfg.centralindia-01.azurewebsites.net/api";
 
 const instanceAPI = axios.create({
     baseURL: BASE_URL,
