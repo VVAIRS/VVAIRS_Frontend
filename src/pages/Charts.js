@@ -77,11 +77,11 @@ export default function Charts() {
         ],
     };
 
-    /* ---------------- OPTIONS (ADVANCED) ---------------- */
+    /* ---------------- OPTIONS ---------------- */
     const barOptions = {
         responsive: true,
         maintainAspectRatio: false,
-        indexAxis: "y", // 🔥 Horizontal bar chart
+        indexAxis: "y",
         plugins: {
             legend: { display: false },
             tooltip: {
@@ -108,38 +108,37 @@ export default function Charts() {
         maintainAspectRatio: false,
         plugins: {
             legend: { position: "bottom" },
-            tooltip: {
-                backgroundColor: "#222",
-                titleColor: "#fff",
-                bodyColor: "#fff",
-            },
         },
     };
 
-    /* ---------------- STYLES ---------------- */
+    /* ---------------- RESPONSIVE STYLES ---------------- */
+    const isMobile = window.innerWidth < 768;
+
     const sectionStyle = {
         padding: "20px 0",
     };
 
     const chartsRowStyle = {
         display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        gap: isMobile ? "30px" : "50px",
         alignItems: "stretch",
-        gap: "50px",
     };
 
     const chartContainer = {
-        height: "260px",
+        height: isMobile ? "240px" : "260px",
         width: "100%",
     };
 
     const verticalDivider = {
         width: "1px",
         backgroundColor: "#e0e0e0",
+        display: isMobile ? "none" : "block",
     };
 
     const sectionTitle = {
         textAlign: "center",
-        fontSize: "18px",
+        fontSize: isMobile ? "16px" : "18px",
         fontWeight: "600",
         marginBottom: "20px",
         color: "#333",
@@ -154,24 +153,30 @@ export default function Charts() {
     };
 
     return (
-        <div style={{ width: "100%", maxWidth: "1600px", margin: "30px auto" }}>
-
+        <div
+            style={{
+                width: "100%",
+                maxWidth: "1600px",
+                margin: "30px auto",
+                padding: isMobile ? "0 16px" : "0 24px",
+            }}
+        >
             {/* TOKEN ANALYTICS */}
             <div style={sectionStyle}>
                 <div style={sectionTitle}>Token Usage Analytics</div>
 
                 <div style={chartsRowStyle}>
                     <div style={{ flex: 1 }}>
-                        <div style={chartTitle}>Token Usage </div>
+                        <div style={chartTitle}>Token Usage</div>
                         <div style={chartContainer}>
                             <Bar data={tokenData} options={barOptions} />
                         </div>
                     </div>
 
-                    <div style={verticalDivider}></div>
+                    <div style={verticalDivider} />
 
                     <div style={{ flex: 1 }}>
-                        <div style={chartTitle}>Token Distribution </div>
+                        <div style={chartTitle}>Token Distribution</div>
                         <div style={chartContainer}>
                             <Pie data={tokenData} options={pieOptions} />
                         </div>
@@ -179,15 +184,7 @@ export default function Charts() {
                 </div>
             </div>
 
-            {/* DIVIDER */}
-            <hr
-                style={{
-                    width: "100%",
-                    margin: "25px 0",
-                    border: "none",
-                    borderTop: "1px solid #e0e0e0",
-                }}
-            />
+            <hr style={{ borderTop: "1px solid #e0e0e0", margin: "25px 0" }} />
 
             {/* CANDIDATE ANALYTICS */}
             <div style={sectionStyle}>
@@ -201,7 +198,7 @@ export default function Charts() {
                         </div>
                     </div>
 
-                    <div style={verticalDivider}></div>
+                    <div style={verticalDivider} />
 
                     <div style={{ flex: 1 }}>
                         <div style={chartTitle}>Candidate Distribution</div>
