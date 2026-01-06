@@ -3,7 +3,6 @@ import {
     TextField,
     Button,
     Typography,
-    Alert,
     Stack,
     InputAdornment,
     Backdrop,
@@ -24,7 +23,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { keyframes } from "@emotion/react";
 
-// Animations (Same as Login)
+// Animations
 const floatAnimation = keyframes`
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -39,7 +38,6 @@ const SignupPage = () => {
         password,
         isCodeSent,
         loading,
-        message,
         sendCode,
         verifyCode,
     } = useAuth();
@@ -47,6 +45,7 @@ const SignupPage = () => {
     const handleGoogleLogin = () => {
         window.location.href = `http://resumezai-cqfzgtffhheqfrfg.centralindia-01.azurewebsites.net/api/auth/login/google`;
     };
+
     return (
         <Box
             sx={{
@@ -121,7 +120,7 @@ const SignupPage = () => {
                             transform: "translateY(-5px)",
                         },
                         maxHeight: '90vh',
-                        overflowY: 'auto', // Handle overflow for smaller screens if form is long
+                        overflowY: 'auto',
                     }}
                 >
                     <Box textAlign="center" mb={3}>
@@ -156,11 +155,11 @@ const SignupPage = () => {
                             Join us today and get started
                         </Typography>
                     </Box>
+
                     <Button
                         fullWidth
                         variant="outlined"
                         onClick={handleGoogleLogin}
-                        // disabled={loginLoading}
                         startIcon={
                             <svg width="20" height="20" viewBox="0 0 18 18">
                                 <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
@@ -193,15 +192,6 @@ const SignupPage = () => {
                         </Typography>
                     </Divider>
 
-                    {message.text && (
-                        <Alert
-                            severity={message.type}
-                            sx={{ width: '100%', mb: 3, borderRadius: 2, fontWeight: "bold" }}
-                        >
-                            {message.text}
-                        </Alert>
-                    )}
-
                     <Stack spacing={2}>
                         <TextField
                             label="Username"
@@ -210,7 +200,7 @@ const SignupPage = () => {
                             disabled={isCodeSent}
                             {...signupRegister("username", { required: "Username required" })}
                             error={!!signupErrors.username}
-                            helperText={signupErrors.username?.message}
+                            helperText={signupErrors.username?.message || ""}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -237,7 +227,7 @@ const SignupPage = () => {
                             disabled={isCodeSent}
                             {...signupRegister("email", { required: "Email required" })}
                             error={!!signupErrors.email}
-                            helperText={signupErrors.email?.message}
+                            helperText={signupErrors.email?.message || ""}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -264,7 +254,7 @@ const SignupPage = () => {
                             disabled={isCodeSent}
                             {...signupRegister("password", { required: "Password required" })}
                             error={!!signupErrors.password}
-                            helperText={signupErrors.password?.message}
+                            helperText={signupErrors.password?.message || ""}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -294,7 +284,7 @@ const SignupPage = () => {
                                     value === password || "Passwords do not match",
                             })}
                             error={!!signupErrors.confirmPassword}
-                            helperText={signupErrors.confirmPassword?.message}
+                            helperText={signupErrors.confirmPassword?.message || ""}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -353,7 +343,7 @@ const SignupPage = () => {
                                     boxShadow: "0 4px 14px 0 rgba(79, 70, 229, 0.4)",
                                     borderRadius: 2,
                                     fontWeight: "bold",
-                                    minWidth: '120px', // Ensure button doesn't get too small
+                                    minWidth: '120px',
                                     "&:hover": {
                                         background: "linear-gradient(to right, #4338ca, #6d28d9)",
                                     },
