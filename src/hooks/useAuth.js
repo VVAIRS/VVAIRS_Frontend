@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import NotificationContext from "../context/NotificationContext";
 import { login, signup, verify } from "../api/auth";
 
 const useAuth = () => {
     const navigate = useNavigate();
-    const [message, setMessage] = useState({ type: "", text: "" });
-    const [loginLoading, setLoginLoading] = useState(false);
+    const notification = useContext(NotificationContext);
 
     const loginForm = useForm();
     const signupForm = useForm();
@@ -14,77 +14,77 @@ const useAuth = () => {
 
     /* ================= LOGIN ================= */
     const loginUser = async (data) => {
-        setMessage({ type: "", text: "" });
-        setLoginLoading(true);
-
+        notification.showLoader();
         try {
             const res = await login(data);
 
             if (res?.data?.token) {
+                notification.success("Login successful");
                 navigate("/");
             } else {
-                setMessage({ type: "error", text: "Login failed" });
+                notification.error("Login failed");
             }
         } catch (err) {
-            setMessage({
-                type: "error",
-                text: err.response?.data?.detail || "Login failed",
-            });
+            notification.error(
+                err.response?.data?.detail || "Login failed"
+            );
         } finally {
-            setLoginLoading(false);
+            notification.hideLoader();
         }
     };
 
     /* ================= SIGNUP ================= */
     const sendCode = async (data) => {
-        setMessage({ type: "", text: "" });
+        notification.showLoader();
         try {
             const res = await signup(data);
+
             if (res?.data?.ok) {
-                setMessage({
-                    type: "success",
-                    text: `Verification code sent to ${data.email}`,
-                });
+                notification.success(
+                    `Verification code sent to ${data.email}`
+                );
             }
         } catch (err) {
-            setMessage({
-                type: "error",
-                text: err.response?.data?.detail || "Failed to send code",
-            });
+            notification.error(
+                err.response?.data?.detail || "Failed to send code"
+            );
+        } finally {
+            notification.hideLoader();
         }
     };
 
     const verifyCode = async (data) => {
-        setMessage({ type: "", text: "" });
+        notification.showLoader();
         try {
             const res = await verify(data);
+
             if (res?.data?.ok) {
-                setMessage({
-                    type: "success",
-                    text: "Signup successful! Redirecting...",
-                });
+                notification.success("Signup successful! Redirecting...");
                 setTimeout(() => navigate("/"), 1000);
             }
         } catch (err) {
-            setMessage({
-                type: "error",
-                text: err.response?.data?.detail || "Verification failed",
-            });
+            notification.error(
+                err.response?.data?.detail || "Verification failed"
+            );
+        } finally {
+            notification.hideLoader();
         }
     };
 
     return {
+        /* Login */
         loginRegister: loginForm.register,
         loginHandleSubmit: loginForm.handleSubmit,
         loginErrors: loginForm.formState.errors,
-        loginLoading,
         loginUser,
+
+        /* Signup */
         signupRegister: signupForm.register,
         signupHandleSubmit: signupForm.handleSubmit,
         signupErrors: signupForm.formState.errors,
         sendCode,
         verifyCode,
-        message,
+
         password,
     };
 };
