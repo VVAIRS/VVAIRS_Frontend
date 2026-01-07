@@ -5,11 +5,13 @@ import {
     Typography,
     Box,
     Chip,
-    Stack,
-    Avatar
+    Avatar,
+    Tooltip
 } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import IconButton from "@mui/material/IconButton";
+
 export default function CandidateCardTemplate({ data, onClick }) {
     const avatarColors = [
         "#1D4ED8", // blue
@@ -148,32 +150,58 @@ export default function CandidateCardTemplate({ data, onClick }) {
                 </Box>
 
                 {/* Quick Info - Fixed height section */}
-                <Box sx={{
-                    flexShrink: 0,
-                    minHeight: '70px' // Reserve space for info
-                }}>
-                    <Stack spacing={0.75}>
-                        <Box display="flex" alignItems="center" gap={0.75}>
-                            <EmailOutlinedIcon fontSize="small" color="action" />
-                            <Typography
-                                variant="body2"
-                                sx={{
-                                    wordBreak: 'break-word',
-                                    overflowWrap: 'break-word'
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    width="100%"
+                >
+                    {/* 75% Email */}
+                    <Box
+                        display="flex"
+                        alignItems="center"
+                        gap={0.75}
+                        sx={{ width: "75%", minWidth: 0 }}
+                    >
+                        <EmailOutlinedIcon fontSize="small" color="action" />
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                wordBreak: "break-word",
+                                overflowWrap: "break-word"
+                            }}
+                        >
+                            {data.email}
+                        </Typography>
+                    </Box>
+
+                    {/* 25% Centered View Icon */}
+                    <Box
+                        sx={{
+                            width: "25%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <Tooltip title="View Resume" arrow>
+                            <IconButton
+                                size="small"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+
+                                    if (data.resume_url) {
+                                        window.open(data.resume_url, "_blank", "noopener,noreferrer");
+                                    }
                                 }}
                             >
-                                {data.email}
-                            </Typography>
-                        </Box>
+                                <VisibilityOutlinedIcon fontSize="small" sx={{ color: "primary.main" }} />
+                            </IconButton>
+                        </Tooltip>
 
-                        <Box display="flex" alignItems="center" gap={0.75}>
-                            <WorkOutlineIcon fontSize="small" color="action" />
-                            <Typography variant="body2">
-                                {data.experience_years}
-                            </Typography>
-                        </Box>
-                    </Stack>
+                    </Box>
                 </Box>
+
+
 
                 {/* Skills - Flexible height but with min height */}
                 <Box

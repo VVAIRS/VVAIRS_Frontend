@@ -31,8 +31,8 @@ export default function CandidatesDashboardPage() {
                         underline="none"
                         sx={{
                             fontSize: "1.2rem",
-                            color: "black",
-                            "&:hover": { color: "black" },
+                            color: "primary.main",
+                            "&:hover": { color: "primary.main" },
                         }}
                         onClick={() => navigate("/")}
                     >
