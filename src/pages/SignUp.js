@@ -124,19 +124,6 @@ const SignupPage = () => {
                     }}
                 >
                     <Box textAlign="center" mb={3}>
-                        <Box sx={{
-                            width: 50,
-                            height: 50,
-                            bgcolor: '#4f46e5',
-                            borderRadius: '12px',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            mb: 2,
-                            boxShadow: '0 4px 10px rgba(79, 70, 229, 0.4)'
-                        }}>
-                            <Person sx={{ color: 'white' }} />
-                        </Box>
 
                         <Typography
                             variant="h4"

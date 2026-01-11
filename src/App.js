@@ -5,22 +5,27 @@ import JobsDashboardPage from "./pages/JobsDashboardPage";
 import CandidateDashboardPage from "./pages/CandidateDashboardPage";
 import SignupPage from "./pages/SignUp";
 import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+
+import MainLayout from "./layout/MainLayout";
 // import PrivateRoute from "./api/PrivateRoute";
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Routes>
+      <Routes>
+        {/* Layout wrapper */}
+        <Route element={<MainLayout />}>
           {/* Protected routes */}
           <Route
-            path="/"
+            path="/dashboard"
             element={
               // <PrivateRoute>
               <JobsDashboardPage />
               // </PrivateRoute>
             }
           />
+
           <Route
             path="/jobs/:jobId/candidates"
             element={
@@ -31,10 +36,11 @@ function App() {
           />
 
           {/* Public routes */}
+          <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </div>
+        </Route>
+      </Routes>
     </Router>
   );
 }

@@ -39,7 +39,7 @@ export default function JobGrid({ onDataLoaded }) {
     const styles = {
         container: {
             p: 3,
-            bgcolor: "#f8f9fa",
+            bgcolor: "white",
             minHeight: "100vh",
         },
         paper: {

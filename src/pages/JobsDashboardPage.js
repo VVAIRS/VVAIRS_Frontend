@@ -17,8 +17,10 @@ export default function JobsDashboardPage() {
     return (
         <Box
             sx={{
-                p: 3,
-                bgcolor: "#f4f6f8",
+                pt: "100px",
+                px: 3,
+                pb: 3,
+                bgcolor: "white",
                 minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",

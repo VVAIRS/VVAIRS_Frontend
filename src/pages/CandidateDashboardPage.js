@@ -15,7 +15,7 @@ export default function CandidatesDashboardPage() {
 
 
     return (
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ pt: "100px", px: 2, pb: 2 }}>
             {/* Header */}
             <Box
                 sx={{
@@ -34,7 +34,7 @@ export default function CandidatesDashboardPage() {
                             color: "primary.main",
                             "&:hover": { color: "primary.main" },
                         }}
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/dashboard")}
                     >
                         Jobs /
                     </Link>
