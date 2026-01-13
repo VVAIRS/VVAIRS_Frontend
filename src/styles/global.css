@@ -1,0 +1,26 @@
+/* Global CSS is intentionally minimal since styling is primarily managed via utility classes. */
+
+:root {
+  color-scheme: light;
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.18);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.25);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
