@@ -42,13 +42,7 @@ function HomeHero({ onPrimary, onSecondary }) {
                             >
                                 Get Started
                             </Button>
-                            <Button
-                                variant="secondary"
-                                onClick={() => navigate("/jobs")}
-                                iconClass="icon-message-square-text"
-                            >
-                                Request Demo
-                            </Button>
+                            <Button variant="secondary" onClick={onSecondary} iconClass="icon-message-square-text">Request Demo</Button>
                         </Stack>
 
                         <Grid container spacing={2}>
