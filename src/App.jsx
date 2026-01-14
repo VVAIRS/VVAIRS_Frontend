@@ -80,11 +80,13 @@ function Layout() {
         brand="AI Resume Screening"
         items={[
           { label: 'Home', href: '/' }, // We will handle this in Header logic
-          { label: 'Features', href: '/#features' },
-          { label: 'Why Us', href: '/#why' },
-          { label: 'Use Cases', href: '/#usecases' },
+          // { label: 'Features', href: '/#features' },
+          // { label: 'Why Us', href: '/#why' },
+          // { label: 'Use Cases', href: '/#usecases' },
           { label: 'About', href: '/about' },
-          { label: 'Pricing', href: '/pricing' }
+          { label: 'Pricing', href: '/pricing' },
+          { label: 'Signup', href: '/signup' },
+          { label: 'Login', href: '/login' },
         ]}
         cta={{ label: 'Request Demo', onClick: openDemo }}
       />
@@ -112,7 +114,7 @@ export default function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/signup' element={<SignupPage />} />
-            <Route path='/dashboard' element={<JobsDashboardPage />} />
+            <Route path='/jobs' element={<JobsDashboardPage />} />
             <Route path="/jobs/:jobId/candidates" element={<CandidatesDashboardPage />} />
           </Route>
         </Routes>
