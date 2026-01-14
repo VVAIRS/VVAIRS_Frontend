@@ -12,6 +12,7 @@ import SectionHeading from '../components/common/SectionHeading';
 import Button from '../components/common/Button';
 
 function HomeHero({ onPrimary, onSecondary }) {
+    const navigate = useNavigate();
     return (
         <Box component="section" sx={{ position: 'relative', overflow: 'hidden', pt: { xs: 8, sm: 10 }, pb: { xs: 6, sm: 8 } }} id="home">
             {/* Background Effects */}
@@ -34,8 +35,20 @@ function HomeHero({ onPrimary, onSecondary }) {
                         </Typography>
 
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} mb={5}>
-                            <Button variant="primary" onClick={onPrimary} iconClass="icon-arrow-right">Get Started</Button>
-                            <Button variant="secondary" onClick={onSecondary} iconClass="icon-message-square-text">Request Demo</Button>
+                            <Button
+                                variant="primary"
+                                onClick={() => navigate("/jobs")}
+                                iconClass="icon-arrow-right"
+                            >
+                                Get Started
+                            </Button>
+                            <Button
+                                variant="secondary"
+                                onClick={() => navigate("/jobs")}
+                                iconClass="icon-message-square-text"
+                            >
+                                Request Demo
+                            </Button>
                         </Stack>
 
                         <Grid container spacing={2}>
@@ -248,6 +261,7 @@ function UseCases({ items }) {
 }
 
 function FinalCTA({ onClick, onViewPricing }) {
+    const navigate = useNavigate();
     return (
         <Box component="section" sx={{ pb: 8 }}>
             <Container maxWidth="lg">
@@ -269,7 +283,14 @@ function FinalCTA({ onClick, onViewPricing }) {
                             </Typography>
                         </Grid>
                         <Grid item xs={12} lg={5} display="flex" justifyContent="flex-end" gap={2}>
-                            <Button variant="primary" onClick={onClick} style={{ backgroundColor: '#fff', color: '#0f172a' }}>
+                            <Button
+                                variant="primary"
+                                onClick={() => {
+                                    navigate("/jobs")
+                                    console.log("Navigate to jobs");
+                                }}
+                                style={{ backgroundColor: "#fff", color: "#0f172a" }}
+                            >
                                 Start Screening
                             </Button>
                             <Button variant="secondary" onClick={onViewPricing} style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>

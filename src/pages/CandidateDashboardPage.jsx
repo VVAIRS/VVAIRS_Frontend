@@ -34,7 +34,7 @@ export default function CandidatesDashboardPage() {
                             color: "primary.main",
                             "&:hover": { color: "primary.main" },
                         }}
-                        onClick={() => navigate("/dashboard")}
+                        onClick={() => navigate("/jobs")}
                     >
                         Jobs /
                     </Link>

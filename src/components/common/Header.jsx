@@ -70,10 +70,10 @@ export default function Header({ brand, items, cta, ...rest }) {
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 1, color: 'text.secondary', fontSize: '0.75rem' }}>
+          {/* <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 1, color: 'text.secondary', fontSize: '0.75rem' }}>
             <LucideIcon name="keyboard" size={16} />
             <span>Press <Box component="span" sx={{ border: 1, borderColor: 'divider', borderRadius: 1, px: 0.5, bgcolor: 'grey.100' }}>D</Box> for demo</span>
-          </Box>
+          </Box> */}
 
           {cta && (
             <Button

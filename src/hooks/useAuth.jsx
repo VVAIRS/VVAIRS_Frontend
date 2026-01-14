@@ -20,7 +20,7 @@ const useAuth = () => {
 
             if (res?.data?.token) {
                 notification.success("Login successful");
-                navigate("/dashboard");
+                navigate("/jobs");
             } else {
                 notification.error("Login failed");
             }
@@ -60,7 +60,7 @@ const useAuth = () => {
 
             if (res?.data?.ok) {
                 notification.success("Signup successful! Redirecting...");
-                setTimeout(() => navigate("/dashboard"), 1000);
+                setTimeout(() => navigate("/jobs"), 1000);
             }
         } catch (err) {
             notification.error(
