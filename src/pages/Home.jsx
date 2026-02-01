@@ -41,6 +41,7 @@ function HomeHero({ onPrimary, onSecondary }) {
                                 iconClass="icon-arrow-right"
                             >
                                 Get Started
+                                
                             </Button>
                             <Button variant="secondary" onClick={onSecondary} iconClass="icon-message-square-text">Request Demo</Button>
                         </Stack>
