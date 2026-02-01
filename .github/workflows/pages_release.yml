@@ -22,4 +22,4 @@ jobs:
           apiToken: ${{ secrets.CLOUD_FLARE_PAGES_API }}
           accountId: ${{ secrets.CLOUD_FLARE_ACCOUNT_ID }}
           projectName: ${{ secrets.PROJECT_NAME }}
-          directory: build
+          directory: dist
