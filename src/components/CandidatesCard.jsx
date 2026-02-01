@@ -65,7 +65,7 @@ export default function CandidatesCards({ onDataLoaded }) {
                 <Box
                     key={item}
                     sx={{
-                        width: { xs: "100%", sm: "435px", md: "435px" },
+                        width: { xs: "100%", sm: "280px", md: "280px" },
                         flexGrow: 0,
                         flexShrink: 0
                     }}
@@ -138,7 +138,7 @@ export default function CandidatesCards({ onDataLoaded }) {
                     <Box
                         key={candidate.id}
                         sx={{
-                            width: { xs: "100%", sm: "435px", md: "435px" },
+                            width: { xs: "100%", sm: "280px", md: "280px" },
                             flexGrow: 0,
                             flexShrink: 0
                         }}

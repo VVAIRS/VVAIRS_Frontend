@@ -38,7 +38,7 @@ instanceAPI.interceptors.response.use(
 
         if (error.response?.status === 401) {
             console.warn("🚨 Unauthorized – redirecting to login");
-            window.location.href = "/login"; // login page
+            // window.location.href = "/login"; // login page
         }
 
         return Promise.reject(error);

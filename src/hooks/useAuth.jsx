@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import NotificationContext from "../context/NotificationContext";
-import { login, signup, verify } from "../api/auth";
-
+import { login, signup, verify, logout } from "../api/auth";
+import { useAuthContext } from "../context/AuthContext";
 const useAuth = () => {
     const navigate = useNavigate();
     const notification = useContext(NotificationContext);
+    const { checkAuth } = useAuthContext();
 
     const loginForm = useForm();
     const signupForm = useForm();
@@ -20,6 +21,7 @@ const useAuth = () => {
 
             if (res?.data?.token) {
                 notification.success("Login successful");
+                await checkAuth();
                 navigate("/jobs");
             } else {
                 notification.error("Login failed");
@@ -70,7 +72,21 @@ const useAuth = () => {
             notification.hideLoader();
         }
     };
-
+    const logoutUser = async () => {
+        notification.showLoader();
+        try {
+            await logout(); // backend logout
+            await checkAuth();
+            notification.success("Logged out successfully");
+            navigate("/login");
+        } catch (err) {
+            notification.error(
+                err.response?.data?.detail || "Logout failed"
+            );
+        } finally {
+            notification.hideLoader();
+        }
+    };
     return {
         /* Login */
         loginRegister: loginForm.register,
@@ -86,6 +102,7 @@ const useAuth = () => {
         verifyCode,
 
         password,
+        logoutUser
     };
 };
 
