@@ -45,6 +45,7 @@ export default function Header({ brand, cta, ...rest }) {
 
     isAuthenticated === false && { label: "Signup", href: "/signup" },
     isAuthenticated === false && { label: "Login", href: "/login" },
+    // Added Jobs link for authenticated users
     isAuthenticated === true && { label: "Jobs", href: "/jobs" },
   ].filter(Boolean);
 
