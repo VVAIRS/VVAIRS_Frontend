@@ -12,7 +12,6 @@ const instanceAPI = axios.create({
     withCredentials: true, // ✅ COOKIE AUTH
 });
 
-/* ================= RESPONSE INTERCEPTOR (DEBUG) ================= */
 instanceAPI.interceptors.response.use(
     (response) => {
         console.log(
