@@ -42,7 +42,7 @@ export default function CandidateCardTemplate({ data, onClick }) {
                 borderRadius: 3,
                 border: "1px solid",
                 borderColor: "divider",
-                height: "250px", // Fixed height for uniformity
+                height: "200px", // Fixed height for uniformity
                 width: "100%",
                 minWidth: 0,
                 maxWidth: "100%",
@@ -86,9 +86,10 @@ export default function CandidateCardTemplate({ data, onClick }) {
                             sx={{
                                 bgcolor: getAvatarColor(data.name),
                                 fontWeight: 600,
-                                width: 40,
-                                height: 40,
-                                flexShrink: 0
+                                width: 28,
+                                height: 28,
+                                flexShrink: 0,
+                                fontSize: "0.7rem"
                             }}
                         >
                             {data.name?.charAt(0)?.toUpperCase()}
@@ -101,7 +102,8 @@ export default function CandidateCardTemplate({ data, onClick }) {
                                 sx={{
                                     wordBreak: 'break-word', // Break long names
                                     overflowWrap: 'break-word', // Modern alternative
-                                    lineHeight: 1.3
+                                    lineHeight: 1.3,
+                                    fontSize: "0.7rem"
                                 }}
                             >
                                 {data.name}
@@ -119,23 +121,31 @@ export default function CandidateCardTemplate({ data, onClick }) {
                     >
                         <Chip
                             label={data.status}
+                            size="small"
                             sx={{
                                 mb: 1,
-                                px: 1.5,
-                                height: 26,
-                                fontSize: "0.8rem",
+                                height: 20,
+                                px: 0.75,
+                                fontSize: "0.45rem",
                                 bgcolor: statusStyles[data.status]?.bg,
                                 color: statusStyles[data.status]?.color,
                                 textTransform: "capitalize",
-                                fontWeight: 600
+                                fontWeight: 600,
+
+                                // important: shrink internal label padding
+                                "& .MuiChip-label": {
+                                    px: 0.5,
+                                },
                             }}
                         />
+
 
                         <Typography
                             variant="body1"
                             fontWeight={700}
                             lineHeight={2}
                             sx={{
+                                fontSize: "0.7rem",
                                 color:
                                     data.match_score >= 85
                                         ? "#166534"     // green
@@ -162,12 +172,12 @@ export default function CandidateCardTemplate({ data, onClick }) {
                         gap={0.75}
                         sx={{ width: "75%", minWidth: 0 }}
                     >
-                        <EmailOutlinedIcon fontSize="small" color="action" />
+                        <EmailOutlinedIcon sx={{ fontSize: 14 }} color="action" />
                         <Typography
                             variant="body2"
                             sx={{
                                 wordBreak: "break-word",
-                                overflowWrap: "break-word"
+                                overflowWrap: "break-word", fontSize: "0.7rem"
                             }}
                         >
                             {data.email}
@@ -194,7 +204,7 @@ export default function CandidateCardTemplate({ data, onClick }) {
                                     }
                                 }}
                             >
-                                <VisibilityOutlinedIcon fontSize="small" sx={{ color: "primary.main" }} />
+                                <VisibilityOutlinedIcon sx={{ color: "primary.main", fontSize: 14 }} />
                             </IconButton>
                         </Tooltip>
 
@@ -208,7 +218,7 @@ export default function CandidateCardTemplate({ data, onClick }) {
                     mt={2}
                     sx={{
                         flexGrow: 1,
-                        minHeight: '60px' // Reserve minimum space for skills
+                        minHeight: '30px' // Reserve minimum space for skills
                     }}
                 >
                     <Box display="flex" flexWrap="wrap" gap={0.5}>
@@ -223,7 +233,7 @@ export default function CandidateCardTemplate({ data, onClick }) {
                                     variant="outlined"
                                     sx={{
                                         height: 22,
-                                        fontSize: "0.7rem",
+                                        fontSize: "0.5rem",
                                         maxWidth: '100px', // Limit chip width
                                         '& .MuiChip-label': {
                                             overflow: 'hidden',
