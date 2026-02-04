@@ -213,7 +213,7 @@ const SignupPage = () => {
               type="password"
               disabled={isCodeSent}
               {...signupRegister("confirmPassword", {
-                validate: value =>
+                validate: (value) =>
                   value === password || "Passwords do not match",
               })}
               error={!!signupErrors.confirmPassword}
@@ -252,7 +252,6 @@ const SignupPage = () => {
 
               <Button
                 variant="contained"
-                disabled={loading || isCodeSent}
                 onClick={signupHandleSubmit(sendCode)}
                 sx={{
                   px: 2,
@@ -269,7 +268,6 @@ const SignupPage = () => {
             {/* Submit */}
             <Button
               fullWidth
-              disabled={!isCodeSent || loading}
               onClick={signupHandleSubmit(verifyCode)}
               sx={{
                 mt: 1,

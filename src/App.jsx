@@ -81,16 +81,7 @@ function Layout() {
   const { toast, pushToast, removeToast } = useToasts();
   const [demoOpen, setDemoOpen] = useState(false);
 
-  // Key shortcut for demo
-  useEffect(() => {
-    const onKeyDown = e => {
-      if (e.key.toLowerCase() === "d") setDemoOpen(true);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
-
-  const onDemoSubmit = payload => {
+  const onDemoSubmit = (payload) => {
     pushToast({
       tone: "success",
       title: "Request received",
