@@ -94,22 +94,17 @@ function HomeHero({ onPrimary, onSecondary }) {
               the right talent using your own secure AI models.
             </Typography>
 
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} mb={5}>
-              <Button
-                variant="primary"
-                onClick={() => navigate("/jobs")}
-                iconClass="icon-arrow-right"
-              >
-                Get Started
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={onSecondary}
-                iconClass="icon-message-square-text"
-              >
-                Request Demo
-              </Button>
-            </Stack>
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} mb={5}>
+                            <Button
+                                variant="primary"
+                                onClick={() => navigate("/jobs")}
+                                iconClass="icon-arrow-right"
+                            >
+                                Get Started
+                                
+                            </Button>
+                            <Button variant="secondary" onClick={onSecondary} iconClass="icon-message-square-text">Request Demo</Button>
+                        </Stack>
 
             <Grid container spacing={2}>
               {[
