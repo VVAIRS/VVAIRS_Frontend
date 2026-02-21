@@ -5,7 +5,7 @@ const BASE_URL =
     //for local
     // "/api";
     // for Cloud site
-    "https://empikaai-dzhbdehthycve5bd.centralindia-01.azurewebsites.net/api";
+    "http://empikaai-dzhbdehthycve5bd.centralindia-01.azurewebsites.net/api";
 
 const instanceAPI = axios.create({
     baseURL: BASE_URL,
