@@ -36,8 +36,6 @@ export default function Header({ brand, cta, ...rest }) {
 
   const profileMenuOpen = Boolean(anchorEl);
 
-  if (loading) return null;
-
   const items = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -86,8 +84,6 @@ export default function Header({ brand, cta, ...rest }) {
     logoutUser();
     navigate("/login");
   };
-
-  if (loading) return null;
 
   return (
     <AppBar
