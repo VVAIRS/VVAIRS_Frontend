@@ -19,6 +19,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate, useLocation } from "react-router-dom";
 import LucideIcon from "./LucideIcon";
 import { useAuthContext } from "../../context/AuthContext";
@@ -32,7 +34,7 @@ export default function Header({ brand, cta, ...rest }) {
   const location = useLocation();
   const pathname = location.pathname.toLowerCase();
   const { logoutUser } = useAuth();
-  const { isAuthenticated, loading, checkAuth } = useAuthContext();
+  const { isAuthenticated, loading, checkAuth, userData } = useAuthContext();
 
   const profileMenuOpen = Boolean(anchorEl);
 
@@ -49,7 +51,7 @@ export default function Header({ brand, cta, ...rest }) {
     isAuthenticated === true && { label: "Jobs", href: "/jobs" },
   ].filter(Boolean);
 
-  const onNav = href => {
+  const onNav = (href) => {
     setOpen(false);
 
     if (href.startsWith("/#")) {
@@ -65,7 +67,7 @@ export default function Header({ brand, cta, ...rest }) {
     navigate(href);
   };
 
-  const isActive = it => {
+  const isActive = (it) => {
     if (pathname.endsWith(it.href) && it.href !== "/" && !it.href.includes("#"))
       return true;
     if ((pathname === "/" || pathname === "/index.html") && it.href === "/")
@@ -73,7 +75,7 @@ export default function Header({ brand, cta, ...rest }) {
     return false;
   };
 
-  const handleProfileClick = event => {
+  const handleProfileClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -114,7 +116,7 @@ export default function Header({ brand, cta, ...rest }) {
         {/* Logo */}
         <Box
           component="a"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             onNav("/");
           }}
@@ -190,8 +192,20 @@ export default function Header({ brand, cta, ...rest }) {
           {isAuthenticated && (
             <>
               <IconButton onClick={handleProfileClick}>
-                <Avatar sx={{ width: 32, height: 32 }}>
-                  <AccountCircleIcon />
+                <Avatar
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    bgcolor: "primary.main",
+                    fontSize: 14,
+                    fontWeight: 700,
+                  }}
+                >
+                  {userData?.email ? (
+                    userData.email[0].toUpperCase()
+                  ) : (
+                    <AccountCircleIcon fontSize="small" />
+                  )}
                 </Avatar>
               </IconButton>
 
@@ -207,11 +221,17 @@ export default function Header({ brand, cta, ...rest }) {
                     handleProfileClose();
                     navigate("/profile");
                   }}
+                  sx={{ gap: 1 }}
                 >
+                  <PersonIcon fontSize="small" />
                   Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleLogout} sx={{ color: "error.main" }}>
+                <MenuItem
+                  onClick={handleLogout}
+                  sx={{ color: "error.main", gap: 1 }}
+                >
+                  <LogoutIcon fontSize="small" />
                   Logout
                 </MenuItem>
               </Menu>

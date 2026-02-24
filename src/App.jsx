@@ -24,6 +24,7 @@ import JobsDashboardPage from "./pages/JobsDashboardPage";
 import CandidatesDashboardPage from "./pages/CandidateDashboardPage";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/common/ProtectedRoutes";
+import Profile from "./components/common/Profile";
 // Helper to scroll to top on route change
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -139,6 +140,7 @@ export default function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
+              <Route path="/profile" element={<Profile />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/jobs" element={<JobsDashboardPage />} />
                 <Route

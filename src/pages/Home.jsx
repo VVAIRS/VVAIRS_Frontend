@@ -9,7 +9,7 @@ import {
   Chip,
 } from "@mui/material";
 import { useOutletContext, useNavigate } from "react-router-dom";
-
+import AssistantIcon from "@mui/icons-material/Assistant";
 import FeatureCard from "../components/common/FeatureCard";
 import PricingTeaser from "../components/common/PricingTeaser";
 import ChartCard from "../components/common/ChartCard";
@@ -218,9 +218,14 @@ function HomeHero({ onPrimary, onSecondary }) {
                             72%
                           </Typography>
                         </Box>
-                        <IconBadge
-                          iconClass="icon-wand-sparkles"
-                          tone="primary"
+                        <AssistantIcon
+                          sx={{
+                            fontSize: 40, // increase icon size
+                            color: "#ffffff",
+                            backgroundColor: "#1976d2",
+                            borderRadius: "30%",
+                            padding: "8px",
+                          }}
                         />
                       </Box>
                       <Typography
@@ -293,68 +298,235 @@ function WhyChooseUs({ items }) {
         />
         <Grid container spacing={6} mt={4}>
           <Grid item xs={12} lg={6}>
-            <Card sx={{ p: 4, height: "100%" }}>
-              <Stack direction="row" spacing={3} alignItems="flex-start">
-                <IconBadge iconClass="icon-shield-check" tone="primary" />
+            <Card
+              elevation={0}
+              sx={{
+                height: "100%",
+                border: "1px solid",
+                borderColor: "divider",
+                borderRadius: 3,
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {/* Gradient header strip */}
+              <Box
+                sx={{
+                  px: 3,
+                  py: 2.5,
+                  background:
+                    "linear-gradient(135deg, #1976d2 0%, #1565c0 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 2,
+                    bgcolor: "rgba(255,255,255,0.15)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <LucideIcon name="shield-check" size={22} color="#fff" />
+                </Box>
                 <Box>
-                  <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  <Typography variant="subtitle1" fontWeight={700} color="#fff">
                     Built for privacy & compliance
                   </Typography>
-                  <Typography variant="body2" color="text.secondary" paragraph>
-                    We run self-hosted AI models with strict data isolation, so
-                    your resumes never get shared with third-party AI providers.
+                  <Typography
+                    variant="caption"
+                    sx={{ color: "rgba(255,255,255,0.75)" }}
+                  >
+                    Self-hosted AI · Zero third-party data exposure
                   </Typography>
+                </Box>
+              </Box>
 
-                  <Grid container spacing={2} mt={1}>
-                    <Grid item xs={12} sm={6}>
+              {/* Body */}
+              <Box p={3} flex={1} display="flex" flexDirection="column" gap={3}>
+                {/* Description */}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  lineHeight={1.7}
+                >
+                  We run self-hosted AI models with strict data isolation, so
+                  your resumes never get shared with third-party AI providers.
+                </Typography>
+
+                {/* Stat tiles */}
+                <Grid container spacing={1.5}>
+                  {[
+                    {
+                      label: "Data flow",
+                      value: "Private by default",
+                      icon: "shield",
+                      color: "#1976d2",
+                    },
+                    {
+                      label: "Controls",
+                      value: "Custom scoring logic",
+                      icon: "settings-2",
+                      color: "#7b1fa2",
+                    },
+                    {
+                      label: "Storage",
+                      value: "Your infrastructure",
+                      icon: "server",
+                      color: "#0288d1",
+                    },
+                    {
+                      label: "Access",
+                      value: "Role-based controls",
+                      icon: "lock",
+                      color: "#2e7d32",
+                    },
+                  ].map((stat, i) => (
+                    <Grid item xs={6} key={i}>
                       <Box
-                        p={2}
-                        border={1}
-                        borderColor="divider"
-                        borderRadius={2}
-                        bgcolor="grey.50"
+                        sx={{
+                          p: 1.5,
+                          border: "1px solid",
+                          borderColor: "divider",
+                          borderRadius: 2,
+                          bgcolor: "#fafafa",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1.5,
+                          height: "100%",
+                        }}
                       >
-                        <Typography variant="caption" color="text.secondary">
-                          Data flow
-                        </Typography>
-                        <Typography variant="subtitle2">
-                          Private by default
-                        </Typography>
+                        <Box
+                          sx={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 1.5,
+                            bgcolor: `${stat.color}18`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                          }}
+                        >
+                          <LucideIcon
+                            name={stat.icon}
+                            size={15}
+                            color={stat.color}
+                          />
+                        </Box>
+                        <Box>
+                          <Typography
+                            variant="caption"
+                            color="text.disabled"
+                            display="block"
+                            lineHeight={1.2}
+                          >
+                            {stat.label}
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            fontWeight={700}
+                            color="text.primary"
+                            lineHeight={1.3}
+                          >
+                            {stat.value}
+                          </Typography>
+                        </Box>
                       </Box>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <Box
-                        p={2}
-                        border={1}
-                        borderColor="divider"
-                        borderRadius={2}
-                        bgcolor="grey.50"
-                      >
-                        <Typography variant="caption" color="text.secondary">
-                          Controls
-                        </Typography>
-                        <Typography variant="subtitle2">
-                          Custom scoring logic
-                        </Typography>
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  ))}
+                </Grid>
 
-                  <Stack direction="row" spacing={1} mt={3} alignItems="center">
-                    <LucideIcon name="lock" size={16} color="disabled" />
-                    <Typography variant="caption" color="text.secondary">
-                      Designed for high-volume hiring with enterprise
-                      safeguards.
-                    </Typography>
+                {/* Checklist */}
+                <Box>
+                  <Typography
+                    variant="overline"
+                    color="text.secondary"
+                    fontWeight={700}
+                    letterSpacing={1}
+                  >
+                    What's guaranteed
+                  </Typography>
+                  <Stack spacing={1} mt={1}>
+                    {[
+                      "No resume data sent to external AI APIs",
+                      "Isolated compute per organisation",
+                      "Audit-ready screening logs",
+                      "GDPR-aligned data handling",
+                    ].map((point, i) => (
+                      <Stack
+                        key={i}
+                        direction="row"
+                        spacing={1.2}
+                        alignItems="flex-start"
+                      >
+                        <Box sx={{ mt: "2px", flexShrink: 0 }}>
+                          <LucideIcon
+                            name="circle-check"
+                            size={14}
+                            color="#2e7d32"
+                          />
+                        </Box>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          lineHeight={1.6}
+                        >
+                          {point}
+                        </Typography>
+                      </Stack>
+                    ))}
                   </Stack>
                 </Box>
-              </Stack>
+
+                {/* Trust badge strip */}
+                <Box
+                  sx={{
+                    mt: "auto",
+                    pt: 2,
+                    borderTop: "1px solid",
+                    borderColor: "divider",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {["SOC 2 ready", "GDPR aligned", "Zero-trust"].map(
+                    (badge) => (
+                      <Chip
+                        key={badge}
+                        label={badge}
+                        size="small"
+                        color="primary"
+                        variant="outlined"
+                        sx={{
+                          fontSize: 10,
+                          height: 22,
+                          borderRadius: 1,
+                          fontWeight: 600,
+                        }}
+                      />
+                    ),
+                  )}
+                  <Typography variant="caption" color="text.disabled" ml="auto">
+                    Enterprise safeguards
+                  </Typography>
+                </Box>
+              </Box>
             </Card>
           </Grid>
 
           <Grid item xs={12} lg={6}>
             <Stack spacing={2}>
-              {items.map((t, idx) => (
+              {items.map((item, idx) => (
                 <Card key={idx} sx={{ p: 3 }}>
                   <Stack direction="row" spacing={2} alignItems="flex-start">
                     <Box
@@ -368,22 +540,14 @@ function WhyChooseUs({ items }) {
                         justifyContent: "center",
                       }}
                     >
-                      <LucideIcon name="circle-check" size={24} color="#fff" />
+                      <LucideIcon name={item.icon} size={24} color="#fff" />
                     </Box>
                     <Box>
                       <Typography variant="subtitle2" fontWeight="bold">
-                        {t}
+                        {item.title}
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
-                        {
-                          [
-                            "Keep hiring data internal with isolated compute.",
-                            "Process hundreds of resumes in one batch.",
-                            "Reduce noise with consistent AI scoring.",
-                            "Tune scoring to match each role and team.",
-                            "Designed to match compliance expectations for enterprises.",
-                          ][idx]
-                        }
+                        {item.description}
                       </Typography>
                     </Box>
                   </Stack>
@@ -573,12 +737,12 @@ export default function Home() {
       title: "AI-Based Resume Scoring",
       description:
         "Diff-check skills, experience, and relevance against the JD.",
-      iconClass: "icon-chart-bar",
+      iconClass: "icon-star",
     },
     {
       title: "Automated Shortlisting",
       description: "Easily segregate shortlisted and rejected candidates.",
-      iconClass: "icon-square-check",
+      iconClass: "icon-area-chart",
     },
     {
       title: "Custom Email Communication",
@@ -593,11 +757,31 @@ export default function Home() {
   ];
 
   const whyChoose = [
-    "We use self-hosted AI models — no third-party data leakage",
-    "Designed for high-volume hiring",
-    "Fast, accurate, and unbiased resume screening",
-    "Customizable scoring logic",
-    "Built with enterprise security standards",
+    {
+      title: "Self-hosted AI models",
+      description: "Keep hiring data internal with isolated compute.",
+      icon: "shield-check",
+    },
+    {
+      title: "High-volume hiring",
+      description: "Process hundreds of resumes in one batch.",
+      icon: "layers",
+    },
+    {
+      title: "Unbiased screening",
+      description: "Reduce noise with consistent AI scoring.",
+      icon: "zap",
+    },
+    {
+      title: "Customizable logic",
+      description: "Tune scoring to match each role and team.",
+      icon: "settings-2",
+    },
+    {
+      title: "Enterprise standards",
+      description: "Designed to match compliance expectations for enterprises.",
+      icon: "lock",
+    },
   ];
 
   const useCases = [
