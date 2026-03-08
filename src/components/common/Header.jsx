@@ -34,7 +34,8 @@ export default function Header({ brand, cta, ...rest }) {
   const location = useLocation();
   const pathname = location.pathname.toLowerCase();
   const { logoutUser } = useAuth();
-  const { isAuthenticated, loading, checkAuth, userData } = useAuthContext();
+  const { isAuthenticated, loading, checkAuth, userData, userRequest } =
+    useAuthContext();
 
   const profileMenuOpen = Boolean(anchorEl);
 
@@ -49,7 +50,7 @@ export default function Header({ brand, cta, ...rest }) {
     isAuthenticated === true && { label: "Jobs", href: "/jobs" },
   ].filter(Boolean);
 
-  const onNav = (href) => {
+  const onNav = href => {
     setOpen(false);
 
     if (href.startsWith("/#")) {
@@ -65,7 +66,7 @@ export default function Header({ brand, cta, ...rest }) {
     navigate(href);
   };
 
-  const isActive = (it) => {
+  const isActive = it => {
     if (pathname.endsWith(it.href) && it.href !== "/" && !it.href.includes("#"))
       return true;
     if ((pathname === "/" || pathname === "/index.html") && it.href === "/")
@@ -73,7 +74,7 @@ export default function Header({ brand, cta, ...rest }) {
     return false;
   };
 
-  const handleProfileClick = (event) => {
+  const handleProfileClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -112,7 +113,7 @@ export default function Header({ brand, cta, ...rest }) {
         {/* Logo */}
         <Box
           component="a"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             onNav("/");
           }}
@@ -213,7 +214,8 @@ export default function Header({ brand, cta, ...rest }) {
                 transformOrigin={{ vertical: "top", horizontal: "right" }}
               >
                 <MenuItem
-                  onClick={() => {
+                  onClick={async () => {
+                    await userRequest();
                     handleProfileClose();
                     navigate("/profile");
                   }}
