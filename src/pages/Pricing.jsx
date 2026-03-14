@@ -25,7 +25,7 @@ import LucideIcon from "../components/common/LucideIcon";
 import { useRazorpay } from "../hooks/useRazorpay"; // adjust path as needed
 import { useAuthContext } from "../context/AuthContext";
 
-const PROFESSIONAL_PLAN_USD = 10; // amount in USD sent to backend
+const PROFESSIONAL_PLAN_USD = 500; // amount in USD sent to backend
 
 function PricingHero({ onDemo }) {
   const navigate = useNavigate();
@@ -316,7 +316,7 @@ export default function Pricing() {
   // ---------------------------------------------------------------------------
   const { initiate: initiatePayment, loading: paymentLoading } = useRazorpay({
     amount: PROFESSIONAL_PLAN_USD,
-    currency: "usd",
+    currency: "inr",
     name: "HireAI",
     description: "Professional Plan – Monthly",
     // prefill: { name: user.name, email: user.email, contact: user.phone },
