@@ -36,7 +36,6 @@ export default function CandidateModal({ open, onClose, data }) {
     rejected: { bg: "#FEE2E2", color: "#991B1B" },
     pending: { bg: "#FEF3C7", color: "#92400E" },
   };
-  const combined = Object.values(data.reasoning).join(" ");
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
@@ -146,7 +145,7 @@ export default function CandidateModal({ open, onClose, data }) {
             mb={3}
             sx={{ lineHeight: 1.7 }}
           >
-            {combined}
+            {data?.reasoning}
           </Typography>
           <Divider sx={{ my: 3 }} />
         </Stack>
