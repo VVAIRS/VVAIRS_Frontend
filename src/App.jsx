@@ -20,6 +20,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Pricing from "./pages/Pricing";
 import SignupPage from "./pages/SignUpPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import JobsDashboardPage from "./pages/JobsDashboardPage";
 import CandidatesDashboardPage from "./pages/CandidateDashboardPage";
 import { AuthProvider } from "./context/AuthContext";
@@ -139,6 +140,7 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route element={<ProtectedRoute />}>

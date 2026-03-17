@@ -2,7 +2,15 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import NotificationContext from "../context/NotificationContext";
-import { login, signup, verify, logout } from "../api/auth";
+import useAPI from "../api/useApi";
+import {
+  login,
+  signup,
+  verify,
+  logout,
+  forgotPasswordApi,
+  resetPasswordApi,
+} from "../api/auth";
 import { useAuthContext } from "../context/AuthContext";
 const useAuth = () => {
   const navigate = useNavigate();
@@ -10,7 +18,8 @@ const useAuth = () => {
   const { checkAuth } = useAuthContext();
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const { request: resetPasswordRequest } = useAPI(resetPasswordApi);
+  const { request: forgotPasswordRequest } = useAPI(forgotPasswordApi);
   const loginForm = useForm();
   const signupForm = useForm();
   const password = signupForm.watch("password");
@@ -87,6 +96,48 @@ const useAuth = () => {
       notification.hideLoader();
     }
   };
+  const forgotPassword = async (data) => {
+    notification.showLoader();
+    try {
+      const res = await forgotPasswordRequest(data);
+      if (res?.data?.ok) {
+        notification.success("Reset code sent to your email");
+        return true;
+      }
+      return false;
+    } catch (err) {
+      notification.error(
+        err.response?.data?.detail || "Failed to send reset code",
+      );
+      return false;
+    } finally {
+      notification.hideLoader();
+    }
+  };
+
+  const resetPassword = async (data) => {
+    const payload = {
+      email: data?.email,
+      code: data?.code,
+      new_password: data?.new_password,
+    };
+    notification.showLoader();
+    try {
+      const res = await resetPasswordRequest(payload);
+      if (res?.data?.ok) {
+        notification.success("Password reset successfully! Please login.");
+        navigate("/login");
+        return true;
+      }
+      return false;
+    } catch (err) {
+      notification.error(err.response?.data?.detail || "Password reset failed");
+      return false;
+    } finally {
+      notification.hideLoader();
+    }
+  };
+
   return {
     /* Login */
     loginRegister: loginForm.register,
@@ -104,6 +155,8 @@ const useAuth = () => {
     password,
     logoutUser,
     isCodeSent,
+    forgotPassword,
+    resetPassword,
   };
 };
 

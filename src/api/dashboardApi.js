@@ -19,3 +19,9 @@ export const updateJobApi = (jobId, formData) => {
 export const fetchJobByIdApi = (jobId) => {
     return instanceAPI.get(`/jobs/${jobId}/status`);
 };
+export const fetchJobDetailsApi = (jobId) => {
+    return instanceAPI.get(`/jobs/${jobId}/jd-details`);
+};
+export const RequestDemoApi = (data) => {
+    return instanceAPI.post("/email/demo-request", data);
+};
