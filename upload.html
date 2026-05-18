@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resume Optimizer - CareerFocus</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-container-highest": "#e1e3e4",
+                  "primary-container": "#2563eb",
+                  "on-primary-fixed-variant": "#003ea8",
+                  "on-tertiary-fixed": "#131b2e",
+                  "primary-fixed-dim": "#b4c5ff",
+                  "error-container": "#ffdad6",
+                  "surface-tint": "#0053db",
+                  "on-secondary-fixed": "#0b1c30",
+                  "background": "#f8f9fa",
+                  "on-error-container": "#93000a",
+                  "surface-variant": "#e1e3e4",
+                  "surface-dim": "#d9dadb",
+                  "surface-container-high": "#e7e8e9",
+                  "primary": "#004ac6",
+                  "surface-container-low": "#f3f4f5",
+                  "on-primary-container": "#eeefff",
+                  "secondary-fixed": "#d3e4fe",
+                  "outline": "#737686",
+                  "on-error": "#ffffff",
+                  "on-tertiary-container": "#eef0ff",
+                  "secondary-container": "#d0e1fb",
+                  "tertiary-fixed-dim": "#bec6e0",
+                  "secondary-fixed-dim": "#b7c8e1",
+                  "surface-bright": "#f8f9fa",
+                  "inverse-on-surface": "#f0f1f2",
+                  "on-secondary": "#ffffff",
+                  "on-surface": "#191c1d",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary-fixed-variant": "#38485d",
+                  "on-surface-variant": "#434655",
+                  "surface-container": "#edeeef",
+                  "on-secondary-container": "#54647a",
+                  "inverse-primary": "#b4c5ff",
+                  "on-primary-fixed": "#00174b",
+                  "surface-container-lowest": "#ffffff",
+                  "surface": "#f8f9fa",
+                  "tertiary-container": "#656d84",
+                  "secondary": "#505f76",
+                  "outline-variant": "#c3c6d7",
+                  "on-primary": "#ffffff",
+                  "tertiary-fixed": "#dae2fd",
+                  "inverse-surface": "#2e3132",
+                  "primary-fixed": "#dbe1ff",
+                  "on-background": "#191c1d",
+                  "tertiary": "#4d556b",
+                  "error": "#ba1a1a",
+                  "on-tertiary-fixed-variant": "#3f465c"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "spacing": {
+                  "md": "16px",
+                  "xl": "32px",
+                  "sidebar-width": "280px",
+                  "lg": "24px",
+                  "sm": "8px",
+                  "base": "8px",
+                  "xs": "4px",
+                  "gutter": "24px"
+          },
+          "fontFamily": {
+                  "label-md": ["Inter", "sans-serif"],
+                  "display-lg-mobile": ["Inter", "sans-serif"],
+                  "body-lg": ["Inter", "sans-serif"],
+                  "headline-md": ["Inter", "sans-serif"],
+                  "headline-sm": ["Inter", "sans-serif"],
+                  "body-md": ["Inter", "sans-serif"],
+                  "label-sm": ["Inter", "sans-serif"],
+                  "display-lg": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+                  "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                  "display-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                  "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                  "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                  "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                  "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                  "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                  "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Desktop SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-sidebar-width fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex-col justify-between py-xl px-md z-50 shadow-[0px_1px_3px_rgba(0,0,0,0.1)]">
+<div>
+<!-- Header -->
+<div class="flex items-center gap-md px-md mb-xl">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">CareerFocus</h1>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pro Plan</span>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-xs font-label-md text-label-md">
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active Tab: Resume Optimizer -->
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-full px-md py-sm border-l-4 border-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+<span>Resume Optimizer</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span>Job Matcher</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span>Applications</span>
+</a>
+</nav>
+</div>
+<!-- Footer Actions -->
+<div class="flex flex-col gap-sm">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-sm rounded-lg hover:bg-primary hover:text-on-primary transition-colors mb-sm shadow-[0px_1px_3px_rgba(0,0,0,0.1)]">
+        Upgrade to Premium
+      </button>
+<nav class="flex flex-col gap-xs font-label-md text-label-md">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Mobile BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 h-[56px] bg-surface-container-lowest shadow-lg flex justify-around items-center px-sm pb-safe">
+<!-- Inactive Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 transition-transform duration-150 active:scale-90 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active Tab -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 transition-transform duration-150 active:scale-90 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+<span>Optimize</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 transition-transform duration-150 active:scale-90 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span>Matcher</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 transition-transform duration-150 active:scale-90 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span>Apps</span>
+</a>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="md:ml-sidebar-width min-h-screen flex flex-col pb-[56px] md:pb-0">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-lg h-16 bg-surface-container-lowest border-b border-outline-variant shadow-sm sticky top-0 z-40">
+<!-- Left side: Search -->
+<div class="flex-1 max-w-md hidden md:flex items-center bg-surface-container-low rounded-full px-md py-sm border border-outline-variant focus-within:border-primary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.2)] transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm">search</span>
+<input class="bg-transparent border-none outline-none font-body-md text-body-md w-full text-on-surface placeholder:text-on-surface-variant focus:ring-0 p-0" placeholder="Search jobs, skills, or applications..." type="text"/>
+</div>
+<!-- Mobile Title (Hidden on Desktop) -->
+<h2 class="md:hidden font-headline-sm text-headline-sm font-bold text-primary">Resume Optimizer</h2>
+<!-- Right side: Actions -->
+<div class="flex items-center gap-md ml-auto">
+<button class="text-on-surface-variant hover:bg-surface-container-low p-sm rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-sm rounded-full transition-colors hidden md:block">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-sm cursor-pointer">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional user profile avatar with a blue background and white text, presented in a clean, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDANgDmelBh0cJ6Llree3PLa8Ks4Ld0vxLvmLtbuT5cq4o2ElV2coVzuud5aRe9Um1Mm7CST_FLb-U7tu_E8zod8iVaT96juPs_BYhapoIfh-RcFwtxHugKlIxInf2J5pZrt44sC2IbavKuZaZisgVGqrLAa2TUcdLD9e7VRN2XrGWSDWefidLXiGvlLiAQYmKCvlttelLdYl18JyryEINJ0p36A5caavbfzksalvWa3Dy1Yxk9J7CLYwkh7VZr_xD0pJ11IbUVxL6r"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-md lg:p-xl flex flex-col gap-xl max-w-[1440px] mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-sm">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-xs">Optimize Your Resume</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Upload your current resume to receive AI-driven actionable feedback, formatting suggestions, and an industry match score to help you land more interviews.</p>
+</div>
+<button class="hidden md:flex items-center gap-sm bg-surface-container text-on-surface font-label-md text-label-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors border border-outline-variant shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
+<span class="material-symbols-outlined text-[20px]">history</span>
+          View History
+        </button>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-lg">
+<!-- Primary Upload Card (Col Span 2) -->
+<div class="xl:col-span-2 bg-surface-container-lowest rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] p-md lg:p-lg border border-outline-variant flex flex-col">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">Upload Document</h3>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm px-sm py-xs rounded-full">PDF Only</span>
+</div>
+<!-- Drag and Drop Zone -->
+<div class="flex-1 border-2 border-dashed border-primary bg-surface rounded-xl flex flex-col items-center justify-center text-center p-xl min-h-[360px] cursor-pointer hover:bg-secondary-fixed/30 transition-all duration-200 group">
+<div class="w-20 h-20 rounded-full bg-primary-container/20 flex items-center justify-center mb-md group-hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-[40px] text-primary" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Drag &amp; drop your resume (PDF) or click to browse</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl max-w-md">Our system will securely process your document to extract skills, experience, and format integrity.</p>
+<button class="bg-primary text-on-primary rounded-full px-xl py-sm font-label-md text-label-md hover:bg-surface-tint hover:shadow-[0px_4px_10px_rgba(37,99,235,0.3)] transition-all duration-200">
+              Browse Files
+            </button>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-md opacity-70">Maximum file size: 5MB</p>
+</div>
+</div>
+<!-- Right Side Panel: Guidelines & Security -->
+<div class="xl:col-span-1 flex flex-col gap-lg">
+<!-- Optimization Guidelines -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] p-lg border border-outline-variant">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary">rule</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Best Practices</h3>
+</div>
+<ul class="flex flex-col gap-md">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary mt-[2px] text-[20px]">check_circle</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Use standard fonts</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Arial, Calibri, or Times New Roman ensure ATS readability.</p>
+</div>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary mt-[2px] text-[20px]">check_circle</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Avoid complex layouts</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Multiple columns or embedded images can break text extraction.</p>
+</div>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary mt-[2px] text-[20px]">check_circle</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Include clear headers</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Separate "Experience", "Education", and "Skills" distinctly.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Trust & Security Widget -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] p-lg border border-outline-variant bg-gradient-to-br from-surface-container-lowest to-surface-container-low">
+<div class="flex items-center gap-md mb-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">lock</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Secure Processing</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">
+              Your documents are encrypted end-to-end and are never shared with third-party employers without your explicit consent. We automatically delete un-saved analyses after 30 days.
+            </p>
+<a class="font-label-md text-label-md text-primary hover:underline flex items-center gap-xs" href="#">
+              Read our Privacy Policy
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

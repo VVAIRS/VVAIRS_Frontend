@@ -19,6 +19,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate, useLocation } from "react-router-dom";
 import LucideIcon from "./LucideIcon";
 import { useAuthContext } from "../../context/AuthContext";
@@ -32,7 +34,8 @@ export default function Header({ brand, cta, ...rest }) {
   const location = useLocation();
   const pathname = location.pathname.toLowerCase();
   const { logoutUser } = useAuth();
-  const { isAuthenticated, loading, checkAuth } = useAuthContext();
+  const { isAuthenticated, loading, checkAuth, userData, userRequest } =
+    useAuthContext();
 
   const profileMenuOpen = Boolean(anchorEl);
 
@@ -45,6 +48,7 @@ export default function Header({ brand, cta, ...rest }) {
     isAuthenticated === false && { label: "Login", href: "/login" },
     // Added Jobs link for authenticated users
     isAuthenticated === true && { label: "Jobs", href: "/jobs" },
+    isAuthenticated === true && { label: "Job Matcher", href: "/job-search" },
   ].filter(Boolean);
 
   const onNav = href => {
@@ -186,8 +190,20 @@ export default function Header({ brand, cta, ...rest }) {
           {isAuthenticated && (
             <>
               <IconButton onClick={handleProfileClick}>
-                <Avatar sx={{ width: 32, height: 32 }}>
-                  <AccountCircleIcon />
+                <Avatar
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    bgcolor: "primary.main",
+                    fontSize: 14,
+                    fontWeight: 700,
+                  }}
+                >
+                  {userData?.email ? (
+                    userData.email[0].toUpperCase()
+                  ) : (
+                    <AccountCircleIcon fontSize="small" />
+                  )}
                 </Avatar>
               </IconButton>
 
@@ -199,15 +215,22 @@ export default function Header({ brand, cta, ...rest }) {
                 transformOrigin={{ vertical: "top", horizontal: "right" }}
               >
                 <MenuItem
-                  onClick={() => {
+                  onClick={async () => {
+                    await userRequest();
                     handleProfileClose();
                     navigate("/profile");
                   }}
+                  sx={{ gap: 1 }}
                 >
+                  <PersonIcon fontSize="small" />
                   Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleLogout} sx={{ color: "error.main" }}>
+                <MenuItem
+                  onClick={handleLogout}
+                  sx={{ color: "error.main", gap: 1 }}
+                >
+                  <LogoutIcon fontSize="small" />
                   Logout
                 </MenuItem>
               </Menu>

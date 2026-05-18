@@ -15,6 +15,9 @@ const useAuth = () => {
   const signupForm = useForm();
   const password = signupForm.watch("password");
 
+  // Register signup_purpose as required so form validation catches it
+  signupForm.register("signup_purpose", { required: "Please select a purpose" });
+
   /* ================= LOGIN ================= */
   const loginUser = async (data) => {
     notification.showLoader();
@@ -93,17 +96,21 @@ const useAuth = () => {
     loginHandleSubmit: loginForm.handleSubmit,
     loginErrors: loginForm.formState.errors,
     loginUser,
+    loginLoading: loading,
 
     /* Signup */
     signupRegister: signupForm.register,
     signupHandleSubmit: signupForm.handleSubmit,
     signupErrors: signupForm.formState.errors,
+    signupSetValue: signupForm.setValue,
+    signupWatch: signupForm.watch,
     sendCode,
     verifyCode,
 
     password,
     logoutUser,
     isCodeSent,
+    loading,
   };
 };
 

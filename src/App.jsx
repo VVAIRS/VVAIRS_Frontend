@@ -22,8 +22,13 @@ import Pricing from "./pages/Pricing";
 import SignupPage from "./pages/SignUpPage";
 import JobsDashboardPage from "./pages/JobsDashboardPage";
 import CandidatesDashboardPage from "./pages/CandidateDashboardPage";
+import JobSearchPage from "./pages/JobSearch/JobSearchPage";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/common/ProtectedRoutes";
+import Profile from "./components/common/Profile";
+import NeuralDashboardLayout from "./components/common/DashboardLayout";
+import ResumeOptimizerPage from "./pages/JobSearch/ResumeOptimizerPage";
+
 // Helper to scroll to top on route change
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -139,12 +144,21 @@ export default function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
+              <Route path="/profile" element={<Profile />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/jobs" element={<JobsDashboardPage />} />
                 <Route
                   path="/jobs/:jobId/candidates"
                   element={<CandidatesDashboardPage />}
                 />
+              </Route>
+            </Route>
+
+            {/* Neural Dashboard Layout Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route element={<NeuralDashboardLayout />}>
+                <Route path="/job-search" element={<JobSearchPage />} />
+                <Route path="/resume-optimizer" element={<ResumeOptimizerPage />} />
               </Route>
             </Route>
           </Routes>
