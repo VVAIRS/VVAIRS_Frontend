@@ -28,6 +28,8 @@ import ProtectedRoute from "./components/common/ProtectedRoutes";
 import Profile from "./components/common/Profile";
 import NeuralDashboardLayout from "./components/common/DashboardLayout";
 import ResumeOptimizerPage from "./pages/JobSearch/ResumeOptimizerPage";
+import TermsPage from "./pages/TermsPage";
+import PrivacyPage from "./pages/PrivacyPage";
 
 // Helper to scroll to top on route change
 function ScrollToTop() {
@@ -105,7 +107,7 @@ function Layout() {
       flexDirection="column"
     >
       <Header
-        brand="AI Resume Screening"
+        brand="EmpikaAI"
         items={[
           { label: "Home", href: "/" },
           { label: "About", href: "/about" },
@@ -120,7 +122,7 @@ function Layout() {
         <Outlet context={{ openDemo, pushToast }} />
       </Box>
 
-      <Footer brand="AI Resume Screening Platform" />
+      <Footer brand="EmpikaAI" />
       <ToastList toasts={toast} onDismiss={removeToast} />
       <DemoRequestModal
         open={demoOpen}
@@ -145,6 +147,8 @@ export default function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/jobs" element={<JobsDashboardPage />} />
                 <Route
