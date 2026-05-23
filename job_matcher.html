@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Job Matcher - CareerFocus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#2563eb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-fixed": "#131b2e",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#0b1c30",
+                        "background": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e1e3e4",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-high": "#e7e8e9",
+                        "primary": "#004ac6",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-container": "#eeefff",
+                        "secondary-fixed": "#d3e4fe",
+                        "outline": "#737686",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#eef0ff",
+                        "secondary-container": "#d0e1fb",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "surface-bright": "#f8f9fa",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#191c1d",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-surface-variant": "#434655",
+                        "surface-container": "#edeeef",
+                        "on-secondary-container": "#54647a",
+                        "inverse-primary": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "tertiary-container": "#656d84",
+                        "secondary": "#505f76",
+                        "outline-variant": "#c3c6d7",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#dae2fd",
+                        "inverse-surface": "#2e3132",
+                        "primary-fixed": "#dbe1ff",
+                        "on-background": "#191c1d",
+                        "tertiary": "#4d556b",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#3f465c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "32px",
+                        "sidebar-width": "280px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d9dadb; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden bg-surface-container-lowest text-primary font-headline-sm text-headline-sm docked full-width top-0 border-b border-outline-variant shadow-sm flex justify-between items-center w-full px-lg h-16 sticky z-40">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">CareerFocus</span>
+</div>
+<div class="flex items-center gap-md text-on-surface-variant">
+<button class="hover:bg-surface-container-low transition-colors rounded-full p-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="hover:bg-surface-container-low transition-colors rounded-full p-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-surface-container-low transition-colors rounded-full p-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-screen w-sidebar-width fixed left-0 top-0 bg-surface-container-lowest text-primary font-label-md text-label-md border-r border-outline-variant flex flex-col justify-between py-xl px-md z-40">
+<div>
+<div class="mb-xl px-md">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">CareerFocus</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Pro Plan</p>
+</div>
+<ul class="flex flex-col gap-sm">
+<li>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                        Resume Optimizer
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-full px-md py-sm border-l-4 border-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                        Job Matcher
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+                        Applications
+                    </a>
+</li>
+</ul>
+</div>
+<div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-2 rounded-xl mb-md hover:bg-primary transition-colors shadow-sm">
+                Upgrade to Premium
+            </button>
+<ul class="flex flex-col gap-sm border-t border-outline-variant pt-md">
+<li>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                        Help
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-all duration-200 ease-in-out rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                        Logout
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="md:ml-sidebar-width p-md md:p-gutter pb-32 md:pb-gutter max-w-[1440px] mx-auto">
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-background">Job Matcher</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Fine-tune your criteria to find the perfect neural match.</p>
+</div>
+<!-- 30/70 Layout -->
+<div class="flex flex-col lg:flex-row gap-lg items-start">
+<!-- Left Column: Advanced Filters (30%) -->
+<aside class="w-full lg:w-[30%] min-w-[280px] bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-sm sticky top-24">
+<div class="flex items-center gap-sm mb-lg border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary-container" data-icon="tune">tune</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Advanced Filters</h3>
+</div>
+<div class="flex flex-col gap-lg">
+<!-- Slider: Min Match Score -->
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Min Match Score</label>
+<span class="font-label-md text-label-md text-primary-container">50%</span>
+</div>
+<div class="relative h-2 w-full bg-surface-container-high rounded-full overflow-visible flex items-center">
+<div class="absolute left-0 top-0 h-full bg-primary-container rounded-full" style="width: 50%;"></div>
+<div class="absolute w-4 h-4 bg-surface-container-lowest border border-outline rounded-full shadow-sm cursor-pointer hover:scale-110 transition-transform" style="left: 50%; transform: translateX(-50%);"></div>
+</div>
+</div>
+<!-- Slider: Role Similarity -->
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Role Similarity</label>
+<span class="font-label-md text-label-md text-primary-container">60%</span>
+</div>
+<div class="relative h-2 w-full bg-surface-container-high rounded-full overflow-visible flex items-center">
+<div class="absolute left-0 top-0 h-full bg-primary-container rounded-full" style="width: 60%;"></div>
+<div class="absolute w-4 h-4 bg-surface-container-lowest border border-outline rounded-full shadow-sm cursor-pointer hover:scale-110 transition-transform" style="left: 60%; transform: translateX(-50%);"></div>
+</div>
+</div>
+<!-- Input: Location -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="location_on">location_on</span>
+<input class="w-full pl-10 pr-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow" placeholder="e.g. San Francisco, Remote" type="text"/>
+</div>
+</div>
+<!-- Input: Max Years Experience -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Max Years Experience</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="work_history">work_history</span>
+<input class="w-full pl-10 pr-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow" placeholder="5" type="number" value="5"/>
+</div>
+</div>
+<!-- Button: Apply -->
+<button class="w-full mt-sm bg-primary-container text-on-primary-container font-label-md text-label-md py-3 rounded-lg hover:bg-primary transition-colors shadow-sm active:scale-[0.98]">
+                        Apply Filters
+                    </button>
+</div>
+</aside>
+<!-- Right Column: Neural Match Feed (70%) -->
+<section class="w-full lg:flex-1 flex flex-col gap-md">
+<div class="flex justify-between items-center mb-sm px-sm">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Top Neural Matches</h3>
+<button class="flex items-center gap-xs font-label-sm text-label-sm text-primary-container hover:text-primary transition-colors">
+                        Sort by Match %
+                        <span class="material-symbols-outlined text-[16px]" data-icon="sort">sort</span>
+</button>
+</div>
+<!-- Job Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow flex flex-col gap-md cursor-pointer group">
+<div class="flex justify-between items-start gap-md">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary-container transition-colors">Senior Frontend Engineer</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">TechNova Solutions</p>
+</div>
+<div class="flex flex-col items-end gap-xs">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                                92% Match
+                            </span>
+<span class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full font-label-sm text-label-sm">
+                                85% Role Fit
+                            </span>
+</div>
+</div>
+<div class="flex flex-wrap gap-4 font-body-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> Remote
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> 4-6 Yrs Exp
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="today">today</span> Posted 2d ago
+                        </div>
+</div>
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">
+                        TechNova is seeking an experienced frontend engineer to lead the development of our next-generation data visualization platform. You will collaborate closely with product and design teams to build scalable, high-performance user interfaces.
+                    </p>
+<div class="bg-surface-bright rounded-lg p-sm border border-outline-variant/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Matched 5 of 6 key skills:</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">React</span>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">TypeScript</span>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">Tailwind CSS</span>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">Redux</span>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">Jest</span>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded-md font-label-sm text-label-sm border border-error-container opacity-60 line-through">GraphQL</span>
+</div>
+</div>
+<div class="pt-sm mt-auto">
+<button class="w-full md:w-auto bg-surface-container-lowest text-primary-container border border-primary-container font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm active:scale-[0.98]">
+                            Apply Now
+                        </button>
+</div>
+</article>
+<!-- Job Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow flex flex-col gap-md cursor-pointer group">
+<div class="flex justify-between items-start gap-md">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary-container transition-colors">UI/UX Engineer</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">CreativeForge</p>
+</div>
+<div class="flex flex-col items-end gap-xs">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                                88% Match
+                            </span>
+<span class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full font-label-sm text-label-sm">
+                                90% Role Fit
+                            </span>
+</div>
+</div>
+<div class="flex flex-wrap gap-4 font-body-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> New York, NY (Hybrid)
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> 3+ Yrs Exp
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="today">today</span> Posted 5h ago
+                        </div>
+</div>
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">
+                        Join our dynamic agency team bridging the gap between design and development. We need a UI/UX Engineer who breathes CSS, loves interaction design, and can translate Figma prototypes into flawless, accessible code.
+                    </p>
+<div class="bg-surface-bright rounded-lg p-sm border border-outline-variant/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Matched 4 of 5 key skills:</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">CSS/Sass</span>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">Figma</span>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">JavaScript</span>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded-md font-label-sm text-label-sm border border-outline-variant/30">Accessibility (a11y)</span>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded-md font-label-sm text-label-sm border border-error-container opacity-60 line-through">Vue.js</span>
+</div>
+</div>
+<div class="pt-sm mt-auto">
+<button class="w-full md:w-auto bg-surface-container-lowest text-primary-container border border-primary-container font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm active:scale-[0.98]">
+                            Apply Now
+                        </button>
+</div>
+</article>
+<!-- Loading State Skeleton (Demonstrating continuous feed) -->
+<article class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-sm flex flex-col gap-md opacity-60 pointer-events-none animate-pulse">
+<div class="flex justify-between items-start gap-md">
+<div class="w-1/2">
+<div class="h-6 bg-surface-container-high rounded w-full mb-2"></div>
+<div class="h-4 bg-surface-container-high rounded w-2/3"></div>
+</div>
+<div class="flex flex-col items-end gap-xs">
+<div class="h-6 bg-surface-container-high rounded-full w-24"></div>
+<div class="h-6 bg-surface-container-high rounded-full w-20"></div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="h-4 bg-surface-container-high rounded w-20"></div>
+<div class="h-4 bg-surface-container-high rounded w-24"></div>
+</div>
+<div class="h-12 bg-surface-container-high rounded w-full"></div>
+</article>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 h-[56px] bg-surface-container-lowest text-primary font-label-sm-mobile text-label-sm-mobile border-t border-outline-variant shadow-lg flex justify-around items-center px-sm pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-variant transition-transform duration-150 active:scale-90 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-variant transition-transform duration-150 active:scale-90 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="mt-1">Optimize</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 transition-transform duration-150 active:scale-90 shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="mt-1">Matcher</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-variant transition-transform duration-150 active:scale-90 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="mt-1">Apps</span>
+</a>
+</nav>
+</body></html>

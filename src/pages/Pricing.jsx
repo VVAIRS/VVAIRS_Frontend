@@ -25,7 +25,7 @@ import LucideIcon from "../components/common/LucideIcon";
 import { useRazorpay } from "../hooks/useRazorpay"; // adjust path as needed
 import { useAuthContext } from "../context/AuthContext";
 
-const PROFESSIONAL_PLAN_USD = 500; // amount in USD sent to backend
+// Amount is looked up from backend env via plan_code
 
 function PricingHero({ onDemo }) {
   const navigate = useNavigate();
@@ -315,9 +315,7 @@ export default function Pricing() {
   // Razorpay hook – wired to Professional plan
   // ---------------------------------------------------------------------------
   const { initiate: initiatePayment, loading: paymentLoading } = useRazorpay({
-    amount: PROFESSIONAL_PLAN_USD,
-    currency: "inr",
-    name: "HireAI",
+    name: "EmpikaAI",
     description: "Professional Plan – Monthly",
     // prefill: { name: user.name, email: user.email, contact: user.phone },
     onSuccess: (data) => {

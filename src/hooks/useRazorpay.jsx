@@ -87,8 +87,6 @@ async function apiFetch(path, body) {
  *   3. POST /billing/verify-payment → signature verification
  *
  * @param {object}   options
- * @param {number}   options.amount        Amount in USD sent to backend
- * @param {string}   [options.currency]    "usd" (default); backend converts to INR
  * @param {string}   [options.name]        Business name shown in Razorpay popup
  * @param {string}   [options.description] Plan label shown in popup
  * @param {string}   [options.image]       Logo URL shown in popup
@@ -99,9 +97,7 @@ async function apiFetch(path, body) {
  * @returns {{ initiate: Function, loading: boolean, error: string|null }}
  */
 export function useRazorpay({
-  amount,
-  currency = "usd",
-  name = "HireAI",
+  name = "EmpikaAI",
   description = "Professional Plan",
   image,
   prefill = {},
@@ -126,8 +122,7 @@ export function useRazorpay({
 
       // ── 2. Create order ────────────────────────────────────────────────────
       const orderData = await apiFetch("/billing/create-order", {
-        amount,
-        currency,
+        plan_code: "professional",
       });
 
       const {
@@ -194,7 +189,7 @@ export function useRazorpay({
     } finally {
       setLoading(false);
     }
-  }, [amount, currency, name, description, image, prefill, onSuccess, onError]);
+  }, [name, description, image, prefill, onSuccess, onError]);
 
   return { initiate, loading, error };
 }
