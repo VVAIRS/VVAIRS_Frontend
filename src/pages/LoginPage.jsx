@@ -31,6 +31,7 @@ const LoginPage = () => {
     loginErrors,
     loginLoading,
     loginUser,
+    forgotPassword,
   } = useAuth();
 
   const handleGoogleLogin = () => {
@@ -80,7 +81,7 @@ const LoginPage = () => {
       {/* Loader */}
       <Backdrop
         open={loginLoading}
-        sx={{ zIndex: theme => theme.zIndex.modal + 2 }}
+        sx={{ zIndex: (theme) => theme.zIndex.modal + 2 }}
       >
         <CircularProgress sx={{ color: "#818cf8" }} />
       </Backdrop>
@@ -228,6 +229,20 @@ const LoginPage = () => {
             Don’t have an account?{" "}
             <Link to="/signup" style={{ color: "#4f46e5", fontWeight: 600 }}>
               Sign Up
+            </Link>
+          </Typography>
+          <Typography
+            mt={1}
+            textAlign="center"
+            fontSize="0.75rem"
+            color="text.secondary"
+          >
+            Forgot your password?{" "}
+            <Link
+              to="/forgot-password"
+              style={{ color: "#4f46e5", fontWeight: 600 }}
+            >
+              Reset Password
             </Link>
           </Typography>
         </Paper>
