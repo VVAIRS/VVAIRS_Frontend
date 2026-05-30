@@ -11,8 +11,12 @@ import {
   Container,
   Paper,
   CssBaseline,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormHelperText,
 } from "@mui/material";
-import { Person, Email, Lock, LockOpen, VpnKey } from "@mui/icons-material";
+import { Person, Email, Lock, LockOpen, VpnKey, WorkOutline, DescriptionOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { keyframes } from "@emotion/react";
@@ -29,6 +33,8 @@ const SignupPage = () => {
     signupRegister,
     signupHandleSubmit,
     signupErrors,
+    signupSetValue,
+    signupWatch,
     password,
     isCodeSent,
     loading,
@@ -36,9 +42,12 @@ const SignupPage = () => {
     verifyCode,
   } = useAuth();
 
+  const selectedPurpose = signupWatch("signup_purpose");
+
   const handleGoogleLogin = () => {
+    if (!selectedPurpose) return;
     window.location.href =
-      "http://empikaai-dzhbdehthycve5bd.centralindia-01.azurewebsites.net/api/auth/login/google";
+      `http://empikaai-dzhbdehthycve5bd.centralindia-01.azurewebsites.net/api/auth/login/google?purpose=${selectedPurpose}`;
   };
 
   return (
@@ -108,11 +117,110 @@ const SignupPage = () => {
             </Typography>
           </Box>
 
+          {/* Purpose Selection */}
+          <Box sx={{ mb: 2 }}>
+            <Typography
+              fontSize="0.8rem"
+              fontWeight={600}
+              color="text.secondary"
+              mb={0.5}
+            >
+              I want to use this for *
+            </Typography>
+            <RadioGroup
+              row
+              value={selectedPurpose || ""}
+              onChange={(e) => {
+                signupSetValue("signup_purpose", e.target.value, {
+                  shouldValidate: true,
+                });
+              }}
+              sx={{ gap: 1 }}
+            >
+              <FormControlLabel
+                value="resume_screening"
+                disabled={isCodeSent}
+                control={
+                  <Radio
+                    size="small"
+                    sx={{
+                      color: "#6366f1",
+                      "&.Mui-checked": { color: "#4f46e5" },
+                    }}
+                  />
+                }
+                label={
+                  <Stack direction="row" alignItems="center" spacing={0.5}>
+                    <DescriptionOutlined sx={{ fontSize: 16, color: "#6366f1" }} />
+                    <Typography fontSize="0.8rem">Resume Screening</Typography>
+                  </Stack>
+                }
+                sx={{
+                  border: "1px solid",
+                  borderColor:
+                    selectedPurpose === "resume_screening"
+                      ? "#4f46e5"
+                      : "divider",
+                  borderRadius: 2,
+                  px: 1.5,
+                  py: 0.3,
+                  m: 0,
+                  flex: 1,
+                  bgcolor:
+                    selectedPurpose === "resume_screening"
+                      ? "rgba(79,70,229,0.06)"
+                      : "transparent",
+                  transition: "all 0.2s",
+                }}
+              />
+              <FormControlLabel
+                value="job_search"
+                disabled={isCodeSent}
+                control={
+                  <Radio
+                    size="small"
+                    sx={{
+                      color: "#6366f1",
+                      "&.Mui-checked": { color: "#4f46e5" },
+                    }}
+                  />
+                }
+                label={
+                  <Stack direction="row" alignItems="center" spacing={0.5}>
+                    <WorkOutline sx={{ fontSize: 16, color: "#6366f1" }} />
+                    <Typography fontSize="0.8rem">Job Search</Typography>
+                  </Stack>
+                }
+                sx={{
+                  border: "1px solid",
+                  borderColor:
+                    selectedPurpose === "job_search" ? "#4f46e5" : "divider",
+                  borderRadius: 2,
+                  px: 1.5,
+                  py: 0.3,
+                  m: 0,
+                  flex: 1,
+                  bgcolor:
+                    selectedPurpose === "job_search"
+                      ? "rgba(79,70,229,0.06)"
+                      : "transparent",
+                  transition: "all 0.2s",
+                }}
+              />
+            </RadioGroup>
+            {signupErrors.signup_purpose && (
+              <FormHelperText error sx={{ ml: 0.5 }}>
+                {signupErrors.signup_purpose.message}
+              </FormHelperText>
+            )}
+          </Box>
+
           {/* Google Button */}
           <Button
             fullWidth
             variant="outlined"
             onClick={handleGoogleLogin}
+            disabled={!selectedPurpose}
             startIcon={
               <svg width="18" height="18" viewBox="0 0 18 18">
                 <path
@@ -140,7 +248,7 @@ const SignupPage = () => {
               textTransform: "none",
             }}
           >
-            Sign in with Google
+            Sign up with Google
           </Button>
 
           <Divider sx={{ mb: 2 }}>

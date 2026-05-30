@@ -23,9 +23,15 @@ import SignupPage from "./pages/SignUpPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import JobsDashboardPage from "./pages/JobsDashboardPage";
 import CandidatesDashboardPage from "./pages/CandidateDashboardPage";
+import JobSearchPage from "./pages/JobSearch/JobSearchPage";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/common/ProtectedRoutes";
 import Profile from "./components/common/Profile";
+import NeuralDashboardLayout from "./components/common/DashboardLayout";
+import ResumeOptimizerPage from "./pages/JobSearch/ResumeOptimizerPage";
+import TermsPage from "./pages/TermsPage";
+import PrivacyPage from "./pages/PrivacyPage";
+
 // Helper to scroll to top on route change
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -102,7 +108,7 @@ function Layout() {
       flexDirection="column"
     >
       <Header
-        brand="AI Resume Screening"
+        brand="EmpikaAI"
         items={[
           { label: "Home", href: "/" },
           { label: "About", href: "/about" },
@@ -117,7 +123,7 @@ function Layout() {
         <Outlet context={{ openDemo, pushToast }} />
       </Box>
 
-      <Footer brand="AI Resume Screening Platform" />
+      <Footer brand="EmpikaAI" />
       <ToastList toasts={toast} onDismiss={removeToast} />
       <DemoRequestModal
         open={demoOpen}
@@ -143,12 +149,22 @@ export default function App() {
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/jobs" element={<JobsDashboardPage />} />
                 <Route
                   path="/jobs/:jobId/candidates"
                   element={<CandidatesDashboardPage />}
                 />
+              </Route>
+            </Route>
+
+            {/* Neural Dashboard Layout Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route element={<NeuralDashboardLayout />}>
+                <Route path="/job-search" element={<JobSearchPage />} />
+                <Route path="/resume-optimizer" element={<ResumeOptimizerPage />} />
               </Route>
             </Route>
           </Routes>

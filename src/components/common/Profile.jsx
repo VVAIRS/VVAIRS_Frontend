@@ -20,6 +20,7 @@ import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import DescriptionIcon from "@mui/icons-material/Description";
+import CategoryIcon from "@mui/icons-material/Category";
 import { useAuthContext } from "../../context/AuthContext";
 
 const StatCard = ({ icon, label, value, color = "primary.main" }) => (
@@ -196,6 +197,15 @@ const Profile = () => {
                   icon={<EmailIcon fontSize="small" />}
                   label="Email / Username"
                   value={userData?.email}
+                />
+                <InfoRow
+                  icon={<CategoryIcon fontSize="small" />}
+                  label="Signed Up For"
+                  value={
+                    userData?.signup_purpose === "job_search"
+                      ? "Job Search"
+                      : "Resume Screening"
+                  }
                 />
               </Stack>
             </Paper>

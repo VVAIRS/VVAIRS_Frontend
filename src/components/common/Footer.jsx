@@ -24,17 +24,12 @@ export default function Footer({ brand, ...rest }) {
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
             <Stack direction="row" spacing={1} alignItems="center" mb={2}>
-              <Box sx={{ width: 36, height: 36, borderRadius: 2, bgcolor: 'primary.main', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-                <LucideIcon name="scan" size={24} color="#fff" />
-              </Box>
-              <Box>
-                <Typography variant="subtitle2" fontWeight={800} color="text.primary">
-                  {brand}
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  Enterprise-ready hiring automation
-                </Typography>
-              </Box>
+              <Box
+                component="img"
+                src="/empikalogo.png"
+                alt="EmpikaAI"
+                sx={{ height: 32, width: "auto" }}
+              />
             </Stack>
             <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 300, lineHeight: 1.6 }}>
               Secure, scalable resume screening with self-hosted AI models, bulk processing, and recruiter-first workflows.
@@ -63,7 +58,17 @@ export default function Footer({ brand, ...rest }) {
             </Stack>
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={6} md={2}>
+            <Typography variant="caption" fontWeight="bold" color="text.secondary" textTransform="uppercase" display="block" mb={2}>
+              Legal
+            </Typography>
+            <Stack spacing={1}>
+              <Link component="button" variant="body2" color="text.secondary" onClick={() => navTo('/terms')} textAlign="left" underline="hover">Terms &amp; Conditions</Link>
+              <Link component="button" variant="body2" color="text.secondary" onClick={() => navTo('/privacy')} textAlign="left" underline="hover">Privacy Policy</Link>
+            </Stack>
+          </Grid>
+
+          <Grid item xs={12} md={3}>
             <Typography variant="caption" fontWeight="bold" color="text.secondary" textTransform="uppercase" display="block" mb={2}>
               Security
             </Typography>

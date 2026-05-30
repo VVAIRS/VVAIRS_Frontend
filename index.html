@@ -4,18 +4,131 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AI Resume Screening Platform | Faster, Smarter, Secure Hiring</title>
+  <title>EmpikaAI — AI Resume Screening Platform</title>
+  <link rel="icon" type="image/png" href="/empikalogo.png" />
   <meta name="description" content="AI-powered resume screening for recruiters and HR teams. Bulk screening, resume scoring, automated shortlisting, secure self-hosted AI, and email automation." />
   <meta name="keywords" content="AI resume screening, resume scoring, automated shortlisting, recruitment automation, HR tech, secure AI hiring, job description generator" />
 
-  <meta property="og:title" content="AI Resume Screening Platform | Faster, Smarter, Secure Hiring" />
+  <meta property="og:title" content="EmpikaAI — AI Resume Screening Platform" />
   <meta property="og:description" content="Automate resume shortlisting, generate job descriptions, and hire the right talent using secure self-hosted AI models." />
-  <meta name="twitter:title" content="AI Resume Screening Platform | Faster, Smarter, Secure Hiring" />
+  <meta name="twitter:title" content="EmpikaAI — AI Resume Screening Platform" />
   <meta name="twitter:description" content="Bulk resume screening, AI scoring, automated shortlisting, and enterprise-grade security." />
-  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+  <style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+  <script id="tailwind-config">
+          tailwind.config = {
+              darkMode: "class",
+              theme: {
+                  extend: {
+                      "colors": {
+                          "surface-container-highest": "#e1e3e4",
+                          "primary-container": "#2563eb",
+                          "on-primary-fixed-variant": "#003ea8",
+                          "on-tertiary-fixed": "#131b2e",
+                          "primary-fixed-dim": "#b4c5ff",
+                          "error-container": "#ffdad6",
+                          "surface-tint": "#0053db",
+                          "on-secondary-fixed": "#0b1c30",
+                          "background": "#f8f9fa",
+                          "on-error-container": "#93000a",
+                          "surface-variant": "#e1e3e4",
+                          "surface-dim": "#d9dadb",
+                          "surface-container-high": "#e7e8e9",
+                          "primary": "#004ac6",
+                          "surface-container-low": "#f3f4f5",
+                          "on-primary-container": "#eeefff",
+                          "secondary-fixed": "#d3e4fe",
+                          "outline": "#737686",
+                          "on-error": "#ffffff",
+                          "on-tertiary-container": "#eef0ff",
+                          "secondary-container": "#d0e1fb",
+                          "tertiary-fixed-dim": "#bec6e0",
+                          "secondary-fixed-dim": "#b7c8e1",
+                          "surface-bright": "#f8f9fa",
+                          "inverse-on-surface": "#f0f1f2",
+                          "on-secondary": "#ffffff",
+                          "on-surface": "#191c1d",
+                          "on-tertiary": "#ffffff",
+                          "on-secondary-fixed-variant": "#38485d",
+                          "on-surface-variant": "#434655",
+                          "surface-container": "#edeeef",
+                          "on-secondary-container": "#54647a",
+                          "inverse-primary": "#b4c5ff",
+                          "on-primary-fixed": "#00174b",
+                          "surface-container-lowest": "#ffffff",
+                          "surface": "#f8f9fa",
+                          "tertiary-container": "#656d84",
+                          "secondary": "#505f76",
+                          "outline-variant": "#c3c6d7",
+                          "on-primary": "#ffffff",
+                          "tertiary-fixed": "#dae2fd",
+                          "inverse-surface": "#2e3132",
+                          "primary-fixed": "#dbe1ff",
+                          "on-background": "#191c1d",
+                          "tertiary": "#4d556b",
+                          "error": "#ba1a1a",
+                          "on-tertiary-fixed-variant": "#3f465c"
+                      },
+                      "borderRadius": {
+                          "DEFAULT": "0.125rem",
+                          "lg": "0.25rem",
+                          "xl": "0.5rem",
+                          "full": "0.75rem"
+                      },
+                      "spacing": {
+                          "md": "16px",
+                          "xl": "32px",
+                          "sidebar-width": "280px",
+                          "lg": "24px",
+                          "sm": "8px",
+                          "base": "8px",
+                          "xs": "4px",
+                          "gutter": "24px"
+                      },
+                      "fontFamily": {
+                          "label-md": ["Inter"],
+                          "display-lg-mobile": ["Inter"],
+                          "body-lg": ["Inter"],
+                          "headline-md": ["Inter"],
+                          "headline-sm": ["Inter"],
+                          "body-md": ["Inter"],
+                          "label-sm": ["Inter"],
+                          "display-lg": ["Inter"]
+                      },
+                      "fontSize": {
+                          "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                          "display-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                          "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                          "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                          "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                          "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                          "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                          "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                      }
+                  }
+              }
+          }
+      </script>
 </head>
 
-<body>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

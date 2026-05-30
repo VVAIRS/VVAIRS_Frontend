@@ -48,6 +48,7 @@ export default function Header({ brand, cta, ...rest }) {
     isAuthenticated === false && { label: "Login", href: "/login" },
     // Added Jobs link for authenticated users
     isAuthenticated === true && { label: "Jobs", href: "/jobs" },
+    isAuthenticated === true && { label: "Job Matcher", href: "/job-search" },
   ].filter(Boolean);
 
   const onNav = href => {
@@ -127,31 +128,11 @@ export default function Header({ brand, cta, ...rest }) {
           }}
         >
           <Box
-            sx={{
-              width: 36,
-              height: 36,
-              borderRadius: 2,
-              bgcolor: "primary.main",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-            }}
-          >
-            <LucideIcon name="scan" size={24} color="#fff" />
-          </Box>
-          <Box>
-            <Typography variant="subtitle1" fontWeight={800}>
-              {brand}
-            </Typography>
-            <Typography
-              variant="caption"
-              color="text.secondary"
-              display={{ xs: "none", sm: "block" }}
-            >
-              Secure AI hiring workflows
-            </Typography>
-          </Box>
+            component="img"
+            src="/empikalogo.png"
+            alt="EmpikaAI"
+            sx={{ height: 36, width: "auto" }}
+          />
         </Box>
 
         {/* Desktop Nav */}
