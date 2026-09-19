@@ -26,6 +26,8 @@ import { useParams } from "react-router-dom";
 
 import useUploadJob from "../hooks/useUploadJobs";
 
+const ACCEPTED_EXTENSIONS = [".pdf", ".docx", ".zip"];
+
 /* =========================
    VALIDATION SCHEMA
 ========================= */
@@ -40,15 +42,13 @@ const schema = yup.object({
         )
         .test(
             "fileType",
-            "Only PDF, DOC, DOCX files are allowed",
+            "Only PDF, DOCX, and ZIP files are allowed",
             (value) =>
                 !value ||
                 Array.from(value).every((file) =>
-                    [
-                        "application/pdf",
-                        "application/msword",
-                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    ].includes(file.type)
+                    ACCEPTED_EXTENSIONS.some((extension) =>
+                        file.name.toLowerCase().endsWith(extension)
+                    )
                 )
         )
         .test(
@@ -202,6 +202,7 @@ export default function UploadResumesContainer({
                                         hidden
                                         type="file"
                                         multiple
+                                        accept={ACCEPTED_EXTENSIONS.join(",")}
                                         {...register("resumes")}
                                     />
                                 </Button>
