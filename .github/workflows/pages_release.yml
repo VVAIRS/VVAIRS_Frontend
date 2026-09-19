@@ -21,5 +21,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUD_FLARE_PAGES_API }}
           accountId: ${{ secrets.CLOUD_FLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.PROJECT_NAME }}
-          directory: dist
+          command: pages deploy dist --project-name=${{ secrets.PROJECT_NAME }}
