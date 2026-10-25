@@ -16,6 +16,8 @@ jobs:
 
       - run: npm install
       - run: CI=false npm run build
+        env:
+          VITE_API_URL: ${{ secrets.TEST_BASE_URL }}
 
       - uses: cloudflare/wrangler-action@v3
         with:
